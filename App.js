@@ -13,7 +13,6 @@ export default function App() {
         onPress={() => Linking.openURL(url)}
         title="GitHub"
         color="#f78716"
-        accessibilityLabel="Learn more about this purple button"
       />
       <StatusBar style="auto" />
     </View>
