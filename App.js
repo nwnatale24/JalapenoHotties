@@ -1,21 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import React , {useCallback} from 'react';
-import { Alert, Linking, StyleSheet, Text, View , Button} from 'react-native';
+import { Alert, Linking, StyleSheet, Text, View , Button, Image} from 'react-native';
 
 const url = "https://github.com/nwnatale24/JalapenoHotties"
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Below is the link to our GitHub.
+      <Text style={styles.textStyleSheet}>
+        Welcome to this Cheesesteak App thing!
+        {'\n'}
       </Text>
+      <Image source={require('./img/cheesesteak_main_screen.png')} style={styles.image}/>
       <Button
         onPress={() => Linking.openURL(url)}
         title="GitHub"
         color="#f78716"
       />
       <StatusBar style="auto" />
-    </View>
+    </View> 
 
   );
 }
@@ -27,4 +30,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  textStyleSheet: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+
+  image: {
+    flex: 0.4,
+    aspectRatio: 1, 
+    resizeMode: 'contain',
+  }
+
 });
