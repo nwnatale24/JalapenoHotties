@@ -1,7 +1,12 @@
 # JalapenoHotties
 Repo for Cheesesteak App
 
-# First Time Installation Steps:
+## Development Workflow
+The process for building this app should be as follows:
+1. Do this
+2. Do that
+
+## First Time Installation Steps:
 
 1. Make sure you have this repository cloned into an area that you have write access.
 2. Download the 'node_modules.tar.gz' tar file. <br />
@@ -37,7 +42,7 @@ post_pull_build-windows.bat
 ```
 
 
-# Build steps:
+## Build steps:
 Before pushing your build to GitHub, do the following commands so Git does not yell at you for tracking a bajillion react dependencies. 
 
 1. Tar up the node modules directory.
