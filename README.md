@@ -22,11 +22,15 @@ The process for building this app should be as follows:
 ```
 cd .ssh
 ```
-Follow the guided instructions to create the key after pasting and running this next command:
+Follow the guided instructions to create the key after pasting and running this next command:   
+**NOTE:** 
+- When prompted to "Enter file in which to save the key", just press enter.**   
+- Entering a passphrase is not required, but is recommended.
+
 ```
 ssh-keygen -t ed25519 -C "<your_github_account_email>"
 ```
-Once created, open the id_ed25519.pub file. _**MAKE SURE TO OPEN THE '.pub' FILE ONLY.**_
+Once created, open the id_ed25519.pub file in Git Bash/Terminal. _**MAKE SURE TO OPEN THE '.pub' FILE ONLY.**_
 ```
 vi id_ed25519.pub
 ```
