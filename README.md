@@ -1,97 +1,70 @@
-# High-Steaks
-The best app ever made in existence. 
+# Getting Started with Create React App
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Development Workflow
-The process for building this app should be as follows:
-1. Do this
-2. Do that
+## Available Scripts
 
-## First Time Installation Steps:
+In the project directory, you can run:
 
-1. Download Node.js from the following link for your appropriate OS and follow the instructions. Default choices are fine. Make sure to install Chocolatey when prompted: https://nodejs.org/en/download/
----
+### `npm start`
 
-2. Download Git Bash for your appropriate OS. If you are using a Mac or Linux device, the terminal emulator is fine, and you may omit: https://git-scm.com/downloads
----
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-3. Setup SSH keys in Git Bash or terminal using GitHub's instructions for your appropriate OS.   
-```
-* Cick and open Git Bash terminal or terminal emulator *
-```
-```
-cd .ssh
-```
-Follow the guided instructions to create the key after pasting and running this next command:   
-**NOTE:** 
-- When prompted to "Enter file in which to save the key", just press enter.**   
-- Entering a passphrase is not required, but is recommended.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-```
-ssh-keygen -t ed25519 -C "<your_github_account_email>"
-```
-Once created, open the id_ed25519.pub file in Git Bash/Terminal. _**MAKE SURE TO OPEN THE '.pub' FILE ONLY.**_
-```
-vi id_ed25519.pub
-```
-Copy the entire line in the file to your clipboard. Then open a separate web browser and navigate to https://github.com/settings/keys:   
-Click on the green "New SSH Key" button. For title, put whatever. Ex: School Laptop   
-Paste the line copied from your clipboard into the 'Key' section. Leave 'Key type' alone.   
-Press the green "Add SSH Key" button.
-<br />
+### `npm test`
 
----
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run build`
 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-4. Using Git Bash or terminal, clone this repository in a desired directory where you have write access:   
-Navigate to: https://github.com/nwnatale24/JalapenoHotties and sign in to your GitHub account.   
-Press green 'Code' button.   
-Copy the SSH link.   
-Open Git Bash or terminal.   
-Run command:
-```
-git clone <copied_ssh_clone_link_from_github>
-```
----
-5. Download the 'node_modules.tar.gz' tar file. <br />
-- For Windows, paste this link into a web browser, and move the file into the root directory of this repository.
-```
-https://github.com/nwnatale24/JalapenoHotties/releases/download/v1.0-node-module-deps/node_modules.tar.gz
-```
-- For Linux/macOS, in a terminal:
-```
-cd <root_directory_of_this_repository>
-```
-```
-wget https://github.com/nwnatale24/JalapenoHotties/releases/download/v1.0-node-module-deps/node_modules.tar.gz
-```
- **Note**: This must be downloaded elsewhere since the file size too big for git to track.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-<br />
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-5. Untar the node module dependencies and remove the tar file.
-- For Linux/macOS, run the 'post_pull_build.sh' script:
-```
-cd <root_directory_of_this_repository>
-```
-```
-bash post_pull_build.sh
-```
-- For Windows, open a cmd prompt, and run the script:
-```
-cd <root_directory_of_this_repository>
-```
-```
-post_pull_build-windows.bat
-```
+### `npm run eject`
 
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-## Build steps:
-Before pushing your build to GitHub, do the following commands so Git does not yell at you for tracking a bajillion react dependencies. 
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-1. Tar up the node modules directory.
-```
-tar czf node_modules.tar.gz node_modules
-```
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
