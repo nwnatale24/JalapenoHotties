@@ -50,7 +50,7 @@ For naming the branches that are created, we should follow the following convent
 
 This is so we can keep track of who created what branch and for organizational purposes.   
 
-An couple example branch names are below:
+A couple example branch names are below:
 - add-main-login-screen-natale
 - add-grease-meter-davies
 - bugfix-on-database-linking-valiliadis
