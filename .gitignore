@@ -1,0 +1,3 @@
+# ignore pushing node_modules to github, use package.json instead
+node_modules
+package_lock.json
