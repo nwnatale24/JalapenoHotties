@@ -17,7 +17,7 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 // when hitting this endpoint, post a resturant name and address in the localhosted database. 
-app.post("/api/insert", (req, res) => {
+app.post("/api/resturant", (req, res) => {
     
     const resturantName = req.body.resturantName
     const resturantAddress = req.body.resturantAddress

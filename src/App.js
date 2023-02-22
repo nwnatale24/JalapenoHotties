@@ -9,7 +9,7 @@ function App() {
   const [resturantAddress, setResturantAddress] = useState('')
   
   const submitResturant = () => {
-    Axios.post('http://localhost:3001/api/insert', {
+    Axios.post('http://localhost:3001/api/resturant', {
       resturantName: resturantName, 
       resturantAddress: resturantAddress
     }).then(() => {
