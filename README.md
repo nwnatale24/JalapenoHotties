@@ -1,5 +1,11 @@
 # General Information
-This is the source repository for the senior project web application named "High-Steaks". The contributors to this project are: Sean Davies, Nicholas Natale, Daniel Ortiz, Lorenzo Semprevivo, Nikolas Vasiliadis and Felipe Viana. 
+This is the source repository for the senior project web application named "High-Steaks". The contributors to this project are:
+- Sean Davies
+- Nicholas Natale
+- Daniel Ortiz
+- Lorenzo Semprevivo
+- Nikolas Vasiliadis
+- Felipe Viana. 
 
 # Development Workflow
 The general workflow for this project, using git, should be as follows. These instructions use terminal commands, but should be fairly similar when using GitHub Desktop:
@@ -50,11 +56,38 @@ For naming the branches that are created, we should follow the following convent
 
 This is so we can keep track of who created what branch and for organizational purposes.   
 
-An couple example branch names are below:
+A couple example branch names are below:
 - add-main-login-screen-natale
 - add-grease-meter-davies
 - bugfix-on-database-linking-valiliadis
 
+# To Run the Front End UI
+From the root directory of the project:
+```
+npm start
+```
+It should output: "webpack compiled successfully".
+
+# To Run the Database
+From the root directory of the project:
+```
+cd db
+```
+```
+node index.js
+```
+It should output: "running on port 3001".
+
+# To Run the Database for Development Purposes
+From the root directory of the project:
+```
+cd db
+```
+```
+npm run devStart
+```
+This will run the database in a way that we can constantly make changes and see them reflect.   
+It should output: "running on port 3001".
 
 # First Time Repo Installation
 
@@ -71,7 +104,11 @@ https://nodejs.org/en/download/
 npm install -g npm@9.5.0
 ```
 
-3. Install all of the dependencies needed for the project. ***NOTE:*** This command must be run from the root directory of the project. <folder_path>../***JalapenoHotties***/
+3. Install all of the dependencies needed for the project. ***NOTE:*** This command must be run from the root directory of the project. <folder_path>..***/JalapenoHotties/***
+```
+npm install package.json
+```
+4. Install all of the databse dependencies needed for the project. ***NOTE:*** This command must be run from the /db directory of the project. <folder_path>..***/JalapenoHotties/db/***
 ```
 npm install package.json
 ```
