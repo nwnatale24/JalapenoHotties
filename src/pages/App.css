@@ -1,0 +1,146 @@
+
+
+.header-container {
+  color:rgb(255, 255, 255) !important;
+  display:flex;
+  justify-content:space-between;
+  width:100vw;
+  height: 5vh;
+  background-color: rgb(25,18,17);
+}
+.body-container {
+  text-decoration: none;  
+  color:rgb(255, 255, 255) !important;
+  display:flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: 95vh;
+  background-color: rgb(37,30,27);
+}
+
+.LeftToolbar {
+  text-decoration: none;  
+  font-size: medium;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10em;
+  height: 95vh;
+  background-color: rgb(25,18,17);
+  color: lightgrey
+}
+
+.Account {
+  color:lightgray;
+  text-decoration: none;  
+  text-align: center;
+  height: 2em;
+  width: 10em;
+}
+.Account:link {
+  text-decoration: none;  
+}
+
+.Account:hover {
+  text-decoration: none;
+  background-color: rgb(40,33,30);
+}
+.Popup {
+  text-decoration: none;  
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  width: 50vw;
+  
+}
+.Map {
+  text-decoration: none;  
+  color:gray;
+  font-size: 10em;
+  height: 50%;
+  width: 100%;
+  background-color: rgb(40, 33, 30);
+
+}
+.Description {
+  text-decoration: none;  
+  color: lightgrey;
+  height: 20%;
+  width: 100%;
+  background-color: rgb(61, 58, 56);
+}
+
+
+.Title {
+  text-decoration: none;  
+  color: white;
+  font-size:large;
+  font-family:sans-serif;
+}
+
+.Logo {
+  text-decoration: none;  
+  font-size:large;
+  font-family:sans-serif;
+  text-align: center;
+  height: 5vh;
+  width: 10em;
+  color: white;
+
+}
+
+.TabsLinks {
+  color:lightgray;
+  text-decoration: none;  
+  text-align: center;
+  height: 2em;
+  width: 10em;
+}
+.TabsLinks:hover {
+  text-decoration: none;  
+  background-color: rgb(40,33,30);
+}
+.List {
+  text-decoration: none;  
+  text-align: center;
+  height: 2em;
+  width: 10em;
+  margin-bottom: 33em;
+}
+.List:hover {
+  text-decoration: none;  
+  background-color: rgb(40,33,30);
+}
+
+.Filters {
+  text-decoration: none;  
+  font-size: medium;
+  font-family:sans-serif;
+  text-align: center;
+  height: 95vh;
+  width: 10em;
+  background-color: rgb(25,18,17);
+  color: lightgrey
+}
+.FilterItems {
+  text-decoration: none;  
+  height: 2em;
+  width: 10em;
+}
+.FilterItems:hover {
+  text-decoration: none;  
+  background-color: rgb(40,33,30)
+}
+.Search input{
+  text-decoration: none;  
+  border: 0;
+  height: 2em;
+  width: 10em;
+  background-color: rgb(231, 231, 231);
+}
+.Search input:hover {
+  text-decoration: none;  
+  background-color: rgb(40,33,30)
+}
+
