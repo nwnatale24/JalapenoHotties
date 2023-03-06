@@ -1,9 +1,20 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, Table, MetaData, insert
 
 app = FastAPI()
 engine = create_engine('mysql+mysqlconnector://root:password@localhost/JalapenoHotties')
 metadata = MetaData(bind=engine)
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Create a Table object that represents the "resturant" table in the DB.
 resturant_table = Table('resturant', metadata, autoload=True)
