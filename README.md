@@ -68,26 +68,13 @@ npm start
 ```
 It should output: "webpack compiled successfully".
 
-# To Run the Database
-From the root directory of the project:
+# To Run the FastAPI with the DB
 ```
-cd db
-```
-```
-node index.js
-```
-It should output: "running on port 3001".
-
-# To Run the Database for Development Purposes
-From the root directory of the project:
-```
-cd db
+cd backend/fastapi/
 ```
 ```
-npm run devStart
+./run.sh
 ```
-This will run the database in a way that we can constantly make changes and see them reflect.   
-It should output: "running on port 3001".
 
 # First Time Repo Installation
 
@@ -105,10 +92,6 @@ npm install -g npm@9.5.0
 ```
 
 3. Install all of the dependencies needed for the project. ***NOTE:*** This command must be run from the root directory of the project. <folder_path>..***/JalapenoHotties/***
-```
-npm install package.json
-```
-4. Install all of the databse dependencies needed for the project. ***NOTE:*** This command must be run from the /db directory of the project. <folder_path>..***/JalapenoHotties/db/***
 ```
 npm install package.json
 ```
