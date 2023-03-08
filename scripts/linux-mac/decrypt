@@ -1,0 +1,20 @@
+#! /bin/bash
+#
+# Author: Nicholas Natale
+# Date: 3/6/23
+#
+# This script decrypts the database file that is fed into it, 
+# using the key that it was encrypted with. 
+
+if [[ $# != 1 ]]
+then
+    echo -e "\nPass 1 argument to this script containing the database dump file."
+    echo -e "Example: ./decrypt dump_JalapenoHotties.sql\n"
+    exit
+else
+    echo "Decrypting: " $1
+    ccrypt -d $1
+    echo "Done!"
+fi
+
+

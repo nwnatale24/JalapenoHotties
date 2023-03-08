@@ -1,0 +1,23 @@
+#! /bin/bash
+#
+# Author: Nicholas Natale
+# Date: 3/6/23
+#
+# This script creates a database dump file for easy export and import
+# in conjunction with MySQL Workbench. 
+
+if [[ $# != 1 ]]
+then
+    echo -e "\nPass 1 argument to this script containing the name of the database."
+    echo -e "Example: ./create_dump_file JalapenoHotties\n"
+    exit
+else
+    echo "Creating mysql dump for database: " $1 
+    /usr/local/mysql/bin/mysqldump -u root -p $1 > dump_$1.sql
+    if [[ $? != 0 ]]
+    then
+        rm -f dump_$1.sql
+    else
+        echo "Database dump file created with name: "dump_$1.sql
+    fi
+fi

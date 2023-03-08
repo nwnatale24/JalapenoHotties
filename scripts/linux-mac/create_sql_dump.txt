@@ -1,0 +1,7 @@
+	In order for this script to work, you must have the MySQL bin folder set
+	in the 'Path' environment variable. 
+
+
+	To create a SQL dump of your current Database:
+
+		mysqldump -u root -p <database_name> > dump_<database_name>.sql

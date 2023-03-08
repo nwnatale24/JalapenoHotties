@@ -1,0 +1,19 @@
+#! /bin/bash
+#
+# Author: Nicholas Natale
+# Date: 3/6/23
+#
+# This script encrypts the database file that is fed into it, 
+# using a user defined passphrase. 
+
+if [[ $# != 1 ]]
+then
+    echo -e "\nPass 1 argument to this script containing the database dump file."
+    echo -e "Example: ./encrypt dump_JalapenoHotties.sql\n"
+    exit
+else
+    echo "Encrypting: " $1
+    cp $1 $1_copy
+    ccrypt -e $1_copy
+    echo "Done!"
+fi
