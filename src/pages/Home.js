@@ -8,7 +8,7 @@ import axios from 'axios'
 // Outputs the results of the API call to the console log.
 // Can see the reponse using inspect element in Chrome. 
 function getResturants() {
-  axios.get("http://127.0.0.1:8000/api/resturants").then((response)=> {
+  axios.get("http://127.0.0.1:8000/api/restaurants").then((response)=> {
     console.log(response)
     
   })

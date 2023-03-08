@@ -17,11 +17,11 @@ app.add_middleware(
 )
 
 # Create a Table object that represents the "resturant" table in the DB.
-resturant_table = Table('resturant', metadata, autoload=True)
+resturant_table = Table('restaurant', metadata, autoload=True)
 
 # Endpoint for GET request to return JSON of resturants and their attributes.
-@app.get("/api/resturants")
-async def read_root():
+@app.get("/api/restaurants")
+async def read_resurants():
     try:
         # Open a conection to the DB.
         conn = engine.connect()
@@ -35,27 +35,27 @@ async def read_root():
         for row in results:
             resturant = {
                 "name": row["name"],
-                "address": row["address"]
+                "website": row["website"]
             }
             resturants.append(resturant)
 
         # Close the connection to the DB. 
         conn.close()
 
-        return {"resturants": resturants}
+        return {"restaurants": resturants}
 
     except Exception as e:
         return {"error": str(e)}
 
 # Endpoint to POST (add) a new resturant to our DB. 
 # --- this is still a test. Just puts in a dummy resturant for now --- 
-@app.post("/api/resturants")
-async def read_root():
+@app.post("/api/restaurants")
+async def post_resturants():
     try:
         # Open a connection to the DB.
         conn = engine.connect()
 
-        insert_query = insert(resturant_table).values(name="Testurant", address="some place in NJ")
+        insert_query = insert(resturant_table).values(name="Testaurant", website="google.com")
         results = conn.execute(insert_query)
 
         # Close a connection to the DB. 
