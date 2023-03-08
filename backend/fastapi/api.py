@@ -16,50 +16,51 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Create a Table object that represents the "resturant" table in the DB.
-resturant_table = Table('restaurant', metadata, autoload=True)
+# Create a Table object that represents the "restaurant" table in the DB.
+restaurant_table = Table('restaurant', metadata, autoload=True)
 
-# Endpoint for GET request to return JSON of resturants and their attributes.
+# Endpoint for GET request to return JSON of restaurants and their attributes.
 @app.get("/api/restaurants")
-async def read_resurants():
+async def get_resurants():
     try:
         # Open a conection to the DB.
         conn = engine.connect()
 
-        # Execute a SELECT query on the "resturant" table
-        select_query = resturant_table.select()
+        # Execute a SELECT query on the "restaurant" table
+        select_query = restaurant_table.select()
         results = conn.execute(select_query)
 
         # Loop through the results and build a list of dictionaries
-        resturants = []
+        restaurants = []
         for row in results:
-            resturant = {
+            restaurant = {
                 "name": row["name"],
                 "website": row["website"]
             }
-            resturants.append(resturant)
+            restaurants.append(restaurant)
 
         # Close the connection to the DB. 
         conn.close()
 
-        return {"restaurants": resturants}
+        return {"restaurants": restaurants}
 
     except Exception as e:
         return {"error": str(e)}
 
-# Endpoint to POST (add) a new resturant to our DB. 
-# --- this is still a test. Just puts in a dummy resturant for now --- 
-@app.post("/api/restaurants")
-async def post_resturants():
+# Endpoint to POST (add) a new restaurant to our DB. 
+@app.post("/api/restaurants/")
+async def post_restaurant(name: str, website: str):
     try:
         # Open a connection to the DB.
         conn = engine.connect()
 
-        insert_query = insert(resturant_table).values(name="Testaurant", website="google.com")
+        insert_query = insert(restaurant_table).values(name=name, website=website)
         results = conn.execute(insert_query)
 
-        # Close a connection to the DB. 
+        # Close the connection to the DB. 
         conn.close()
+
+        #TODO: Return the id of the restaurant created. 
 
     except Exception as e:
         return {"error": str(e)}
