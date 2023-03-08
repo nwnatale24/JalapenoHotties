@@ -1,3 +1,5 @@
 # ignore pushing node_modules to github, use package.json instead
 node_modules
-package_lock.json
+package-lock.json
+__pycache__
+.DS_Store

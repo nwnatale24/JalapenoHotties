@@ -2,6 +2,39 @@ import React from 'react'
 import './App.css';
 import Search from './Search';
 import { Link, Route, Routes } from "react-router-dom"
+import axios from 'axios'
+
+// Sample API get call with a button to get the list of resturants. 
+// Outputs the results of the API call to the console log.
+// Can see the reponse using inspect element in Chrome. 
+function getResturants() {
+  axios.get("http://127.0.0.1:8000/api/restaurants").then((response)=> {
+    console.log(response)
+    
+  })
+  .catch(error => {
+    console.error(error);
+  })
+
+}
+
+function postResturant(restaurant_name, restaurant_website) {
+  axios.post('http://127.0.0.1:8000/api/restaurants/', null, { params: {
+      name: restaurant_name,
+      website: restaurant_website
+    }
+  }
+
+  ).then((response)=> {
+    console.log(response)
+    
+  })
+  .catch(error => {
+    console.error(error);
+  })
+
+}
+
 
 export function Home() {
   return (
@@ -31,6 +64,11 @@ export function Home() {
         </div>
         <div className = "List">
           Sort
+        </div>
+        <div className = "Resturant">
+
+        {/* Create a restaurant with this button, passing a sample restaurant name and website. */}
+        <button onClick={() => postResturant( "Testaurant", "somerestaurantwebsite.com")}>Post Resturant</button>
         </div>
       </div>
       <div className = "Popup">
