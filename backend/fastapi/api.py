@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import create_engine, Table, MetaData, insert
+from sqlalchemy import create_engine, Table, MetaData, insert, Column, String, Integer
 
 app = FastAPI()
-engine = create_engine('mysql+mysqlconnector://root:password@localhost/JalapenoHotties')
-metadata = MetaData(bind=engine)
+engine = create_engine('mysql+mysqlconnector://root:password@localhost:3306/jh')
+metadata = MetaData()
 
 origins = ["*"]
 
@@ -16,8 +16,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # Create a Table object that represents the "restaurant" table in the DB.
-restaurant_table = Table('restaurant', metadata, autoload=True)
+restaurant_table = Table(
+    'restaurant', 
+    metadata, 
+    Column("restaurant_id", Integer, primary_key=True),
+    Column("city", String(45), nullable=True),
+    Column("name", String(45), nullable=True), 
+    Column("website", String(45), nullable=True),
+    Column("phone_number", String(45), nullable=True))
+    
 
 # Endpoint for GET request to return JSON of restaurants and their attributes.
 @app.get("/api/restaurants")
@@ -27,22 +36,26 @@ async def get_resurants():
         conn = engine.connect()
 
         # Execute a SELECT query on the "restaurant" table
-        select_query = restaurant_table.select()
-        results = conn.execute(select_query)
+        # select_query = restaurant_table.select()
+        # results = conn.execute(select_query)
 
-        # Loop through the results and build a list of dictionaries
-        restaurants = []
+        # restaurant_names = []
+
+        # # Create an array of the restaurant names. 
+        # for row in results:
+        #     restaurant_names.append(row[2])
+
+        
+        result = conn.execute('INSERT INTO jh.restaurant (city, name) VALUES ("no", "way")")
+        
         for row in results:
-            restaurant = {
-                "name": row["name"],
-                "website": row["website"]
-            }
-            restaurants.append(restaurant)
+            print(row)
+        #return {"restaurant_names " : restaurant_names}
+
+
 
         # Close the connection to the DB. 
         conn.close()
-
-        return {"restaurants": restaurants}
 
     except Exception as e:
         return {"error": str(e)}
@@ -54,7 +67,18 @@ async def post_restaurant(name: str, website: str):
         # Open a connection to the DB.
         conn = engine.connect()
 
-        insert_query = insert(restaurant_table).values(name=name, website=website)
+        print(name)
+        print(website)
+
+        insert_query = insert(restaurant_table).values(
+            restaurant_id=20,
+            city='place',
+            name=name, 
+            website=website,
+            phone_number='1234567890'
+        )
+        
+        
         results = conn.execute(insert_query)
 
         # Close the connection to the DB. 
