@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, Table, MetaData, insert, Column, String, Integer
+import json
 
 app = FastAPI()
 engine = create_engine('mysql+mysqlconnector://root:password@localhost:3306/jh')
@@ -36,17 +37,15 @@ async def get_resurants():
         conn = engine.connect()
 
         # Execute a SELECT query on the "restaurant" table
-        # select_query = restaurant_table.select()
-        # results = conn.execute(select_query)
+        select_query = restaurant_table.select()
+        results = conn.execute(select_query)
 
-        # restaurant_names = []
+        restaurant_names = []
 
-        # # Create an array of the restaurant names. 
-        # for row in results:
-        #     restaurant_names.append(row[2])
+        # Create an array of the restaurant names. 
+        for row in results:
+            restaurant_names.append(row[2])
 
-        
-        result = conn.execute('INSERT INTO jh.restaurant (city, name) VALUES ("no", "way")")
         
         for row in results:
             print(row)
@@ -70,21 +69,23 @@ async def post_restaurant(name: str, website: str):
         print(name)
         print(website)
 
+        # Insert a restaurant using the following values. 
         insert_query = insert(restaurant_table).values(
-            restaurant_id=20,
             city='place',
             name=name, 
             website=website,
             phone_number='1234567890'
         )
         
-        
+        # Execute the insert query. 
         results = conn.execute(insert_query)
 
         # Close the connection to the DB. 
         conn.close()
 
-        #TODO: Return the id of the restaurant created. 
+        # If successful, return a success, a message of null, and the id of the restaurant created. 
+        return {"state" : 'success', "message" : 'null', "restaurant_id" : ""}
 
+    # If not successful, return an error with the error message. 
     except Exception as e:
-        return {"error": str(e)}
+        return {"state" : 'error', "message" : str(e)}
