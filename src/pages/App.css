@@ -106,7 +106,7 @@
   text-align: center;
   height: 2em;
   width: 10em;
-  margin-bottom: 33em;
+  margin-bottom: 2em;
 }
 .List:hover {
   text-decoration: none;  
@@ -142,5 +142,15 @@
 .Search input:hover {
   text-decoration: none;  
   background-color: rgb(40,33,30)
+}
+
+
+.restaurant-select {
+  display: flex;
+  flex: 1fr 1fr;
+  margin-bottom: 30em;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-bottom: 4em;
 }
 

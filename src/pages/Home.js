@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import Search from './Search';
+import RestaurantDropdown from '../components/RestaurantDropdown';
 import { Link, Route, Routes } from "react-router-dom"
 import axios from 'axios'
 
@@ -53,9 +53,6 @@ export function Home() {
     </div>
     <div className = "body-container">
       <div className = "LeftToolbar">
-        <div className = "Search">
-          <Search placeholder="Search Resturaunts..."  />
-        </div>
         <div className = "Account">
             <Link className="Account" style={{textdecoration:'none'}} to="/Account">Account</Link>
         </div>
@@ -64,6 +61,9 @@ export function Home() {
         </div>
         <div className = "List">
           Sort
+        </div>
+        <div className = "restaurant-select">
+          <RestaurantDropdown onClick={() => getResturants()}/>
         </div>
         <div className = "Resturant">
 
