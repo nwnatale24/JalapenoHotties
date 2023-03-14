@@ -1,3 +1,9 @@
+<center><h1>High-Steaks</h1></center>
+<center><h3>A social app for sharing reviews and info about cheesesteaks around you!</h3></center>
+<br></br>
+<center><img src=./cheesesteak.png height=250 width=250 ></img></center>
+<br></br>
+
 # General Information
 This is the source repository for the senior project web application named "High-Steaks". The contributors to this project are:
 - Sean Davies
@@ -69,13 +75,22 @@ npm start
 It should output: "webpack compiled successfully".
 
 # To Run the FastAPI with the DB
+From the root directory of the project:   
+
+For Linux/macOS:
 ```
 cd backend/fastapi/
 ```
 ```
-./run.sh
+./run_linux.sh
 ```
-
+For Windows:
+```
+cd .\backend\fastapi\
+```
+```
+.\run_windows.ps1
+```
 # First Time Repo Installation
 
 ***NOTE:*** The following code below must be used in a shell that cooresponds with your OS (macOS terminal, Microsoft Powershell, Git Bash, Terminal Emulator, etc).

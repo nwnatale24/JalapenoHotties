@@ -1,10 +1,11 @@
 from fastapi import FastAPI
+from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, Table, MetaData, insert, Column, String, Integer
 import json
 
 app = FastAPI()
-engine = create_engine('mysql+mysqlconnector://root:password@localhost:3306/jh', echo= True)
+engine = create_engine('mysql+mysqlconnector://root:password@localhost:3306/jh')
 metadata = MetaData()
 
 origins = ["*"]
@@ -29,35 +30,84 @@ restaurant_table = Table(
     
 metadata.create_all(engine)
 
-
-# Endpoint for GET request to return JSON of restaurants and their attributes.
+# Endpoint for GET request to return JSON of all restaurants and their attributes.
 @app.get("/api/restaurants")
-async def get_resurants():
+async def get_all_resurants():
     try:
         # Open a conection to the DB.
         conn = engine.connect()
 
-        # Execute a SELECT query on the "restaurant" table
+       # Execute a SELECT query on the "restaurant" table
         select_query = restaurant_table.select()
         results = conn.execute(select_query)
 
-        restaurant_names = []
-
-        # Create an array of the restaurant names. 
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "restaurants" : []}
+                    
+        # Create an array of dicts containing the results.
         for row in results:
-            restaurant_names.append(row[2])
+            restaurant_id = row[0]
+            restaurant_city = row[1]
+            restaurant_name= row[2]
+            restaurant_website = row[3]
+            restaurant_phone_number = row[4]
 
+            matches["restaurants"].append({
+                                "id" : restaurant_id,
+                                "city" : restaurant_city,
+                                "name" : restaurant_name,
+                                "website" : restaurant_website,
+                                "phone_number" : restaurant_phone_number
+                
+             })
+
+        return(matches)
         
-        for row in results:
-            print(row)
-        return {"restaurant_names " : restaurant_names}
-
-
-        # Close the connection to the DB. 
-        conn.close()
-
     except Exception as e:
-        return {"error": str(e)}
+        return {"status" : "fail",
+                "message" : str(e)}
+    
+# Endpoint for GET request to return JSON of restaurant and it's attributes, searched by name.
+@app.get("/api/restaurants/{name}") 
+async def get_resurant_by_name(name):
+    try:
+
+        # Open a conection to the DB.
+        conn = engine.connect()
+
+        # Execute a SELECT query on the "restaurant" table
+        select_query = restaurant_table.select().where(restaurant_table.c.name == name)
+        results = conn.execute(select_query)
+
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "restaurants" : []}
+                    
+        # Create an array of dicts containing the results.
+        for row in results:
+            restaurant_id = row[0]
+            restaurant_city = row[1]
+            restaurant_name= row[2]
+            restaurant_website = row[3]
+            restaurant_phone_number = row[4]
+
+            matches["restaurants"].append({
+                                "id" : restaurant_id,
+                                "city" : restaurant_city,
+                                "name" : restaurant_name,
+                                "website" : restaurant_website,
+                                "phone_number" : restaurant_phone_number
+                
+             })
+
+        return(matches)
+        
+    except Exception as e:
+        return {"status" : "fail",
+                "message" : str(e)}
 
 # Endpoint to POST (add) a new restaurant to the DB. 
 @app.post("/api/restaurants/")
