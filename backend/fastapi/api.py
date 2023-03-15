@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, Table, MetaData, insert, Column, String, Integer, Date
+from helpers.clean_nulls import replace_none_values
 
 app = FastAPI()
 engine = create_engine('mysql+mysqlconnector://root:password@localhost:3306/jh')
@@ -84,9 +85,9 @@ async def get_review_by_restaurant_id(rest_id):
         # Close the connection to the database. 
         conn.close()
 
-        # Clean array of Null values, and replace them with 'null' for easy checking.
+        # Clean dict of Null values, and replace them with 'null' string instead
+        # for easy checking.
         matches = replace_none_values(matches)
-
 
         return(matches)
         
