@@ -29,7 +29,7 @@ restaurant_table = Table(
     Column("phone_number", String(45), nullable=True),
     )
 
-# Create a Review object that represents the "restaurant" table in the DB.
+# Create a Review object that represents the "review" table in the DB.
 review_table = Table(
     'review', 
     metadata, 
@@ -128,6 +128,9 @@ async def get_all_resurants():
                                 "phone_number" : restaurant_phone_number
                 
              })
+
+        # Close the connection to the database. 
+        conn.close()
 
         return(matches)
         
