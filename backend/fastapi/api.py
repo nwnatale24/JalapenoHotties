@@ -42,6 +42,19 @@ review_table = Table(
     Column("restaurant_id", Integer, nullable=False)
     )
     
+
+# Create a Table object that represents the "restaurant" table in the DB.
+user_table = Table(
+    'user', 
+    metadata, 
+    Column("user_id", Integer, primary_key=True),
+    Column("first_name", String(45), nullable=True),
+    Column("last_name", String(45), nullable=True), 
+    Column("email_address", String(45), nullable=True),
+    Column("user_rank", String(45), nullable=True),
+    Column("user_image", String(45), nullable=True) # TODO: Need to change from String to access image ...
+    )
+
 metadata.create_all(engine)
 
 # Endpoint for GET request to return all reviews about a particular 
@@ -213,3 +226,47 @@ async def post_restaurant( city: str, name: str, website: str, phone_number: str
     # If not successful, return an error with the error message. 
     except Exception as e:
         return {"state" : 'error', "message" : str(e)}
+
+
+# Endpoint for GET request to return JSON of user and it's attributes, searched by user_id.
+@app.get("/api/users/id/{user_id}") 
+async def get_user_by_user_id(user_id):
+    try:
+
+        # Open a conection to the DB.
+        conn = engine.connect()
+
+        # Execute a SELECT query on the "restaurant" table
+        select_query = user_table.select().where(user_table.c.user_id == user_id)
+        results = conn.execute(select_query)
+
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "users" : []}
+                    
+        # Create an array of dicts containing the results.
+        for row in results:
+            user_id = row[0]
+            first_name = row[1]
+            last_name= row[2]
+            email_address = row[3]
+            user_rank = row[4]
+            user_image = row[5]
+
+            matches["users"].append({
+                                "id" : user_id,
+                                "city" : first_name,
+                                "name" : last_name,
+                                "website" : email_address,
+                                "user_rank" : user_rank,
+                                "user_image" : user_image
+                
+             })
+
+
+        return(matches)
+        
+    except Exception as e:
+        return {"status" : "fail",
+                "message" : str(e)}
