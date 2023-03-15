@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import create_engine, Table, MetaData, insert, Column, String, Integer
-import json
+from sqlalchemy import create_engine, Table, MetaData, insert, Column, String, Integer, Date
 
 app = FastAPI()
 engine = create_engine('mysql+mysqlconnector://root:password@localhost:3306/jh')
@@ -26,9 +25,75 @@ restaurant_table = Table(
     Column("city", String(45), nullable=True),
     Column("name", String(45), nullable=True), 
     Column("website", String(45), nullable=True),
-    Column("phone_number", String(45), nullable=True))
+    Column("phone_number", String(45), nullable=True),
+    )
+
+# Create a Review object that represents the "restaurant" table in the DB.
+review_table = Table(
+    'review', 
+    metadata, 
+    Column("review_id", Integer, primary_key=True),
+    Column("review_title", String(45), nullable=True),
+    Column("review_text", String(450), nullable=True), 
+    Column("review_total_score", Integer, nullable=True),
+    Column("timestamp", Date, nullable=True),
+    Column("user_id", Integer, nullable=False),
+    Column("restaurant_id", Integer, nullable=False)
+    )
     
 metadata.create_all(engine)
+
+# Endpoint for GET request to return all reviews about a particular 
+# restaurant using the id of the restaurant as a PATH parameter.
+@app.get("/api/reviews/{restaurant_id}") 
+async def get_review_by_restaurant_id(rest_id):
+    try:
+
+        # Open a conection to the DB.
+        conn = engine.connect()
+
+        # Execute a SELECT query on the "restaurant" table
+        select_query = review_table.select().where(review_table.c.restaurant_id == rest_id)
+        results = conn.execute(select_query)
+
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "reviews" : []}
+
+        # Create an array of dicts containing the results.
+        for row in results:
+            review_id = row[0]
+            review_title = row[1]
+            review_text = row[2]
+            review_total_score = row[3]
+            timestamp = row[4]
+            user_id = row[5]
+            rest_id = row[6]
+
+            matches["reviews"].append({
+                                "id" : review_id,
+                                "review_title" : review_title,
+                                "review_text" : review_text,
+                                "review_total_score" : review_total_score,
+                                "timestamp" : timestamp,
+                                "user_id" : user_id,
+                                "restaurant_id" : rest_id
+             })
+
+        # Close the connection to the database. 
+        conn.close()
+
+        # Clean array of Null values, and replace them with 'null' for easy checking.
+        matches = replace_none_values(matches)
+
+
+        return(matches)
+        
+    except Exception as e:
+        return {"status" : "fail",
+                "message" : str(e)}
+
 
 # Endpoint for GET request to return JSON of all restaurants and their attributes.
 @app.get("/api/restaurants")
@@ -102,6 +167,9 @@ async def get_resurant_by_name(name):
                                 "phone_number" : restaurant_phone_number
                 
              })
+
+        # Close the connection to the database. 
+        conn.close()
 
         return(matches)
         
