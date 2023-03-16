@@ -110,7 +110,7 @@ async def get_review_by_restaurant_id(rest_id):
 
 
 # Endpoint for GET request to return JSON of all restaurants and their attributes.
-@app.get("/api/restaurants")
+@app.get("/api/restaurants/")
 async def get_all_resurants():
     try:
         # Open a conection to the DB.
@@ -256,14 +256,70 @@ async def get_user_by_user_id(user_id):
 
             matches["users"].append({
                                 "id" : user_id,
-                                "city" : first_name,
-                                "name" : last_name,
-                                "website" : email_address,
+                                "first_name" : first_name,
+                                "last_name" : last_name,
+                                "email_address" : email_address,
                                 "user_rank" : user_rank,
                                 "user_image" : user_image
                 
              })
 
+        # Close the connection to the DB. 
+        conn.close()
+
+        return(matches)
+        
+    except Exception as e:
+        return {"status" : "fail",
+                "message" : str(e)}
+    
+# Endpoint for GET request to return JSON of user and it's attributes, searched by user_id.
+@app.get("/api/users/full_name/{full_name}") 
+async def get_user_by_full_name(full_name):
+    try:
+
+        # Open a conection to the DB.
+        conn = engine.connect()
+
+        # Split full name provided in path into first name and last name. 
+        first_and_last_name_array = full_name.split(" ")
+
+        if len(first_and_last_name_array) != 2:
+            raise Exception("Full name must consist of only a first name and last name, separated by one space.")
+
+        first_name = first_and_last_name_array[0]
+        last_name = first_and_last_name_array[1]
+
+        # Execute a SELECT query on the "restaurant" table
+        select_query = user_table.select().where(user_table.c.first_name == first_name).where(user_table.c.last_name == last_name)
+        results = conn.execute(select_query)
+
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "users" : []}
+                    
+        # Create an array of dicts containing the results.
+        for row in results:
+            user_id = row[0]
+            first_name = row[1]
+            last_name= row[2]
+            email_address = row[3]
+            user_rank = row[4]
+            user_image = row[5]
+
+            matches["users"].append({
+                                "id" : user_id,
+                                "first_name" : first_name,
+                                "last_name" : last_name,
+                                "email_address" : email_address,
+                                "user_rank" : user_rank,
+                                "user_image" : user_image
+                
+             })
+
+        # Close the connection to the DB. 
+        conn.close()
 
         return(matches)
         
