@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css';
 import RestaurantDropdown from '../components/RestaurantDropdown';
 import { Link, Route, Routes } from "react-router-dom"
 import axios from 'axios'
+import FetchResturauntName from '../components/RestaurantDescription';
+import TestSelect from '../components/TestSelect';
 
 // Sample API get call with a button to get the list of resturants. 
 // Outputs the results of the API call to the console log.
@@ -37,6 +39,8 @@ function postResturant(restaurant_name, restaurant_website) {
 
 
 export function Home() {
+  const [isInstant,setisInstant] = useState(false);
+
   return (
   <div>
     <div className = "header-container">
@@ -62,22 +66,16 @@ export function Home() {
         <div className = "List">
           Sort
         </div>
-        <div className = "restaurant-select">
-          <RestaurantDropdown onClick={() => getResturants()}/>
-        </div>
+          <TestSelect/>
         <div className = "Resturant">
-
-        {/* Create a restaurant with this button, passing a sample restaurant name and website. */}
-        <button onClick={() => postResturant( "Testaurant", "somerestaurantwebsite.com")}>Post Resturant</button>
         </div>
       </div>
       <div className = "Popup">
         <div className="Map">
         </div>
-        <div className= "Description">
-          <p>Resturaunt Name : Test</p>
-          <p>Overall Rating : N/A</p>
-          
+        
+        <div>
+          {!isInstant && <FetchResturauntName/>}
         </div>
       </div>
       <div className = "Filters">
