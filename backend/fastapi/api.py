@@ -59,15 +59,15 @@ metadata.create_all(engine)
 
 # Endpoint for GET request to return all reviews about a particular 
 # restaurant using the id of the restaurant as a PATH parameter.
-@app.get("/api/reviews/{restaurant_id}") 
-async def get_review_by_restaurant_id(rest_id):
+@app.get("/api/reviews/restaurant_id/{restaurant_id}") 
+async def get_review_by_restaurant_id(restaurant_id):
     try:
 
         # Open a conection to the DB.
         conn = engine.connect()
 
         # Execute a SELECT query on the "restaurant" table
-        select_query = review_table.select().where(review_table.c.restaurant_id == rest_id)
+        select_query = review_table.select().where(review_table.c.restaurant_id == restaurant_id)
         results = conn.execute(select_query)
 
         # Header for the matches dict.
@@ -83,7 +83,7 @@ async def get_review_by_restaurant_id(rest_id):
             review_total_score = row[3]
             timestamp = row[4]
             user_id = row[5]
-            rest_id = row[6]
+            restaurant_id = row[6]
 
             matches["reviews"].append({
                                 "id" : review_id,
@@ -92,7 +92,7 @@ async def get_review_by_restaurant_id(rest_id):
                                 "review_total_score" : review_total_score,
                                 "timestamp" : timestamp,
                                 "user_id" : user_id,
-                                "restaurant_id" : rest_id
+                                "restaurant_id" : restaurant_id
              })
 
         # Close the connection to the database. 
@@ -326,3 +326,55 @@ async def get_user_by_full_name(full_name):
     except Exception as e:
         return {"status" : "fail",
                 "message" : str(e)}
+    
+ # Endpoint for GET request to return all reviews about a particular 
+# restaurant using the id of the restaurant as a PATH parameter.
+@app.get("/api/reviews/user_id/{user_id}") 
+async def get_review_by_user_id(user_id):
+    try:
+
+        # Open a conection to the DB.
+        conn = engine.connect()
+
+        # Execute a SELECT query on the "restaurant" table
+        select_query = review_table.select().where(review_table.c.user_id == user_id)
+        results = conn.execute(select_query)
+
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "reviews" : []}
+
+        # Create an array of dicts containing the results.
+        for row in results:
+            review_id = row[0]
+            review_title = row[1]
+            review_text = row[2]
+            review_total_score = row[3]
+            timestamp = row[4]
+            user_id = row[5]
+            rest_id = row[6]
+
+            matches["reviews"].append({
+                                "id" : review_id,
+                                "review_title" : review_title,
+                                "review_text" : review_text,
+                                "review_total_score" : review_total_score,
+                                "timestamp" : timestamp,
+                                "user_id" : user_id,
+                                "restaurant_id" : rest_id
+             })
+
+        # Close the connection to the database. 
+        conn.close()
+
+        # Clean dict of Null values, and replace them with 'null' string instead
+        # for easy checking.
+        matches = replace_none_values(matches)
+
+        return(matches)
+        
+    except Exception as e:
+        return {"status" : "fail",
+                "message" : str(e)}
+
