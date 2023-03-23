@@ -4,7 +4,7 @@ import RestaurantDropdown from '../components/RestaurantDropdown';
 import { Link, Route, Routes } from "react-router-dom"
 import axios from 'axios'
 import FetchResturauntName from '../components/RestaurantDescription';
-import TestSelect from '../components/TestSelect';
+import TestSelect from '../components/TestSelect.jsx';
 
 // Sample API get call with a button to get the list of resturants. 
 // Outputs the results of the API call to the console log.
@@ -39,7 +39,6 @@ function postResturant(restaurant_name, restaurant_website) {
 
 
 export function Home() {
-  const [isInstant,setisInstant] = useState(false);
 
   return (
   <div>
@@ -66,16 +65,14 @@ export function Home() {
         <div className = "List">
           Sort
         </div>
-          <TestSelect/>
         <div className = "Resturant">
         </div>
       </div>
       <div className = "Popup">
         <div className="Map">
         </div>
-        
         <div>
-          {!isInstant && <FetchResturauntName/>}
+          <TestSelect/>
         </div>
       </div>
       <div className = "Filters">
