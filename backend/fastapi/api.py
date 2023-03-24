@@ -378,3 +378,47 @@ async def get_review_by_user_id(user_id):
         return {"status" : "fail",
                 "message" : str(e)}
 
+@app.get("/api/restaurant/restaurant_id/{restaurant_id}") 
+async def get_restaurant_by_restaurant_id(restaurant_id):
+    try:
+
+        # Open a conection to the DB.
+        conn = engine.connect()
+
+        # Execute a SELECT query on the "restaurant" table
+        select_query = restaurant_table.select().where(restaurant_table.c.restaurant_id == restaurant_id)
+        results = conn.execute(select_query)
+
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "restaurants" : []}
+                    
+        # Create an array of dicts containing the results.
+        for row in results:
+            restaurant_id = row[0]
+            restaurant_city = row[1]
+            restaurant_name= row[2]
+            restaurant_website = row[3]
+            restaurant_phone_number = row[4]
+
+            matches["restaurants"].append({
+                                "id" : restaurant_id,
+                                "city" : restaurant_city,
+                                "name" : restaurant_name,
+                                "website" : restaurant_website,
+                                "phone_number" : restaurant_phone_number
+                
+             })
+
+        # Close the connection to the database. 
+        conn.close()
+
+        return(matches)
+        
+    except Exception as e:
+        return {"status" : "fail",
+                "message" : str(e)}
+
+
+
