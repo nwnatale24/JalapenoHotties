@@ -217,11 +217,42 @@ async def post_restaurant( city: str, name: str, website: str, phone_number: str
         # Commit the insert query into the database
         conn.commit()
 
+
+        # Get the primary key (id) of the just created restaurant.
+        inserted_restaurant_id = results.inserted_primary_key[0]
+
+
+        # Execute a SELECT query on the "restaurant" table
+        select_query = restaurant_table.select().where(restaurant_table.c.restaurant_id == inserted_restaurant_id)
+        results = conn.execute(select_query)
+
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "restaurants" : []}
+                    
+        # Create an array of dicts containing the results.
+        for row in results:
+            restaurant_id = row[0]
+            restaurant_city = row[1]
+            restaurant_name= row[2]
+            restaurant_website = row[3]
+            restaurant_phone_number = row[4]
+
+            matches["restaurants"].append({
+                                "id" : restaurant_id,
+                                "city" : restaurant_city,
+                                "name" : restaurant_name,
+                                "website" : restaurant_website,
+                                "phone_number" : restaurant_phone_number
+                
+             })
+        
         # Close the connection to the DB. 
         conn.close()
 
-        # If successful, return a success, a message of null, and the id of the restaurant created. 
-        return {"state" : 'success', "message" : 'null'}
+        # Return a resturant with all of it's created credentials. 
+        return(matches)
 
     # If not successful, return an error with the error message. 
     except Exception as e:
