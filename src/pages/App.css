@@ -154,3 +154,14 @@
   padding-bottom: 4em;
 }
 
+.Review-button {
+  color:lightgray;
+  background-color: rgb(25,18,17);
+  height: 20%;
+  width: 100%;
+  text-decoration: none;
+}
+.Review-button:hover {
+  text-decoration: none;  
+  background-color: rgb(40,33,30)
+}
