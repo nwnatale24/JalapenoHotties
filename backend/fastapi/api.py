@@ -3,6 +3,8 @@ from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, Table, MetaData, insert, Column, String, Integer, Date
 from helpers.clean_nulls import replace_none_values
+from helpers.get_date_info import *
+from datetime import datetime
 
 app = FastAPI()
 engine = create_engine('mysql+mysqlconnector://root:password@localhost:3306/jh')
@@ -452,4 +454,117 @@ async def get_restaurant_by_restaurant_id(restaurant_id):
                 "message" : str(e)}
 
 
+# Endpoint to POST (add) a new review to the DB. 
+@app.post("/api/reviews/")
+async def post_review( review_title: str, review_text: str, review_total_score: int, user_id: int, restaurant_id: int):
+    try:
+        # Open a connection to the DB.
+        conn = engine.connect()
 
+        # Get the current date and time to store in the 'timestamp' field in the db.
+        now = datetime.now()
+        curr_time = now.strftime("%Y%m%d%H%M%S")
+
+        # Insert a review using the following values. 
+        insert_query = insert(review_table).values(
+            review_title=review_title,
+            review_text=review_text, 
+            review_total_score=review_total_score,
+            timestamp=curr_time,
+            user_id=user_id, # Need to get the current time here
+            restaurant_id=restaurant_id
+        )
+
+        # Execute the insert query. 
+        results = conn.execute(insert_query)
+
+        # Commit the insert query into the database
+        conn.commit()
+
+        # Get the primary key (id) of the just created review.
+        inserted_review_id = results.inserted_primary_key[0]
+
+        # Execute a SELECT query on the "review" table
+        select_query = review_table.select().where(review_table.c.review_id == inserted_review_id)
+        results = conn.execute(select_query)
+
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "reviews" : []}
+      
+        for row in results:
+            review_id = row[0]
+            review_title = row[1]
+            review_text = row[2]
+            review_total_score = row[3]
+            timestamp = row[4]
+            user_id = row[5]
+            restaurant_id = row[6]
+
+            matches["reviews"].append({
+                                "id" : review_id,
+                                "review_title" : review_title,
+                                "review_text" : review_text,
+                                "review_total_score" : review_total_score,
+                                "timestamp" : timestamp,
+                                "user_id" : user_id,
+                                "restaurant_id" : restaurant_id
+             })
+        
+        # Close the connection to the DB. 
+        conn.close()
+
+        # Return a review with all of it's created credentials. 
+        return(matches)
+
+    # If not successful, return an error with the error message. 
+    except Exception as e:
+        return {"state" : 'error', "message" : str(e)}
+
+# Endpoint for GET request to return all reviews.
+@app.get("/api/reviews") 
+async def get_all_reviews():
+    try:
+
+        # Open a conection to the DB.
+        conn = engine.connect()
+
+        # Execute a SELECT query on the "restaurant" table
+        select_query = review_table.select()
+        results = conn.execute(select_query)
+
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "reviews" : []}
+
+        # Create an array of dicts containing the results.
+        for row in results:
+            review_id = row[0]
+            review_title = row[1]
+            review_text = row[2]
+            review_total_score = row[3]
+            timestamp = row[4]
+            user_id = row[5]
+            restaurant_id = row[6]
+
+            matches["reviews"].append({
+                                "id" : review_id,
+                                "review_title" : review_title,
+                                "review_text" : review_text,
+                                "review_total_score" : review_total_score,
+                                "timestamp" : timestamp,
+                                "user_id" : user_id,
+                                "restaurant_id" : restaurant_id
+             })
+
+        # Close the connection to the database. 
+        conn.close()
+
+
+        return(matches)
+        
+    except Exception as e:
+        return {"status" : "fail",
+                "message" : str(e)}
