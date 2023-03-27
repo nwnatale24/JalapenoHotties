@@ -71,9 +71,7 @@ export function Home() {
       <div className = "Popup">
         <div className="Map">
         </div>
-        <div>
           <TestSelect/>
-        </div>
       </div>
       <div className = "Filters">
         <div className = "FilterItems">
