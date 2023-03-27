@@ -165,3 +165,12 @@
   text-decoration: none;  
   background-color: rgb(40,33,30)
 }
+.review-body {
+  
+  background-color: rgb(55, 52, 49);
+  width: 20em;
+  height:25%;
+}
+.title-ptag {
+  font-size: 14px;
+}

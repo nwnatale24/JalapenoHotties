@@ -3,6 +3,8 @@ import '../App.css';
 import axios from 'axios'
 import Select from "react-select";
 import FetchResturauntName from './RestaurantDescription';
+import e from 'cors';
+import { Link } from 'react-router-dom';
 
 export default class TestSelect extends React.Component{
     
@@ -13,7 +15,12 @@ export default class TestSelect extends React.Component{
         names : "Loading...",
         city : "Loading...",
         phonenumber: "Loading...",
-        website: "Loading..."
+        website: "Loading...",
+        id : "N/A",
+        review_title : "N/A",
+        review_text : "N/A",
+        review_total_score : "N/A",
+        restaurant_id : "N/A",
         
     }
 
@@ -22,20 +29,34 @@ export default class TestSelect extends React.Component{
         const answer = await axios.get("http://127.0.0.1:8000/api/restaurants");
         const data = await answer.data.restaurants
 
+        const answer2 = await axios.get("http://127.0.0.1:8000/api/reviews");
+        const data2 = await answer2.data.reviews
+       
+
+        const review = new Array()
+        for(let i = 0; i < data2.length;i++){
+            review[i] = [data2[i].id,data2[i].review_title,data2[i].review_text,data2[i].review_total_score,data2[i].restaurant_id]
+         }
+
         //Objects can't be stored as a value in the react select option value field. 
         //To fix this I made an array called "object" that holds each part of the json data,
         //which makes it able to be stored in the options.
-        const object = new Array()
+        const restaurant = new Array()
         for(let i = 0; i < data.length;i++){
-           object[i] = [data[i].city,data[i].name,data[i].phone_number,data[i].website]
+           restaurant[i] = [data[i].city,data[i].id,data[i].name,data[i].phone_number,data[i].website]
+           for(let k = 0; k < data2.length;k++){
+            if ( data2[k].restaurant_id == data[i].id)
+                restaurant[i].push(review[k])
+           }
+           
         }
         //Options has two components the value and the label, this for loop assigns the data we got
         //from the axios request to the value and labels in the options.
         const options = []; 
         for(let i = 0; i < data.length;i++){
-            options[i] = {value : object[i], label: data[i].name}
+            options[i] = {value : restaurant[i], label: data[i].name}
         }
-        
+        console.log(restaurant)
         this.setState({options_state:options,loading:false})   
     }
     
@@ -46,18 +67,33 @@ export default class TestSelect extends React.Component{
                     className = "select-class"
                     options={this.state.options_state} 
                     onChange={e => {
+                        console.log(e.value[5][1]);
+                        console.log(e.value[5][2]);
+                        console.log(e.value[5][3]);
                         this.setState({
                             city:e.value[0],
-                            names:e.value[1],
-                            phonenumber:e.value[2],
-                            website:e.value[3]})
+                            id: e.value[1],
+                            names:e.value[2],
+                            phonenumber:e.value[3],
+                            website:e.value[4],
+                            review_title:e.value[5][1],
+                            review_text:e.value[5][2],
+                            review_total_score:e.value[5][3]})
                     }}/>
                 
                     <FetchResturauntName 
+                    id = {this.state.id}
                     names = {this.state.names} 
                     city = {this.state.city} 
                     phonenumber = {this.state.phonenumber} 
-                    website = {this.state.website}/>
+                    website = {this.state.website}
+                    review_title = {this.state.review_title}
+                    review_text = {this.state.review_text}
+                    review_total_score = {this.state.review_total_score}>
+                    </FetchResturauntName>
+                    
+
+                    
                 </div> 
         );
     }
