@@ -112,7 +112,7 @@ async def get_review_by_restaurant_id(restaurant_id):
 
 
 # Endpoint for GET request to return JSON of all restaurants and their attributes.
-@app.get("/api/restaurants/")
+@app.get("/api/restaurants")
 async def get_all_resurants():
     try:
         # Open a conection to the DB.
@@ -197,7 +197,7 @@ async def get_resurant_by_name(name):
                 "message" : str(e)}
 
 # Endpoint to POST (add) a new restaurant to the DB. 
-@app.post("/api/restaurants/")
+@app.post("/api/restaurants")
 async def post_restaurant( city: str, name: str, website: str, phone_number: str):
     try:
         # Open a connection to the DB.
@@ -455,7 +455,7 @@ async def get_restaurant_by_restaurant_id(restaurant_id):
 
 
 # Endpoint to POST (add) a new review to the DB. 
-@app.post("/api/reviews/")
+@app.post("/api/reviews")
 async def post_review( review_title: str, review_text: str, review_total_score: int, user_id: int, restaurant_id: int):
     try:
         # Open a connection to the DB.
