@@ -54,7 +54,7 @@ user_table = Table(
     Column("last_name", String(45), nullable=True), 
     Column("email_address", String(45), nullable=True),
     Column("user_rank", String(45), nullable=True),
-    Column("user_image", String(45), nullable=True) # TODO: Need to change from String to access image ...
+    Column("user_image", String(100), nullable=True) # TODO: Need to change from String to access image ...
     )
 
 metadata.create_all(engine)
@@ -562,6 +562,51 @@ async def get_all_reviews():
         # Close the connection to the database. 
         conn.close()
 
+
+        return(matches)
+        
+    except Exception as e:
+        return {"status" : "fail",
+                "message" : str(e)}
+
+# Endpoint for GET request to return JSON of all users and their attributes. 
+@app.get("/api/users") 
+async def get_all_users():
+    try:
+
+        # Open a conection to the DB.
+        conn = engine.connect()
+
+        # Execute a SELECT query on the "restaurant" table
+        select_query = user_table.select()
+        results = conn.execute(select_query)
+
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "users" : []}
+                    
+        # Create an array of dicts containing the results.
+        for row in results:
+            user_id = row[0]
+            first_name = row[1]
+            last_name= row[2]
+            email_address = row[3]
+            user_rank = row[4]
+            user_image = row[5]
+
+            matches["users"].append({
+                                "id" : user_id,
+                                "first_name" : first_name,
+                                "last_name" : last_name,
+                                "email_address" : email_address,
+                                "user_rank" : user_rank,
+                                "user_image" : user_image
+                
+             })
+
+        # Close the connection to the DB. 
+        conn.close()
 
         return(matches)
         
