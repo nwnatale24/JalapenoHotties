@@ -17,7 +17,10 @@ return (
                 Reviews
             </div> 
         </div>
-        { isToggled && <Review title={props.review_title} text={props.review_text} score={props.review_total_score}/> } 
+        { isToggled && 
+        <Review 
+        reviews = {props.reviews}
+        /> } 
     </div>
 )
 }

@@ -17,10 +17,7 @@ export default class TestSelect extends React.Component{
         phonenumber: "Loading...",
         website: "Loading...",
         id : "N/A",
-        review_title : "N/A",
-        review_text : "N/A",
-        review_total_score : "N/A",
-        restaurant_id : "N/A",
+        reviews : []
         
     }
 
@@ -32,12 +29,15 @@ export default class TestSelect extends React.Component{
         const answer2 = await axios.get("http://127.0.0.1:8000/api/reviews");
         const data2 = await answer2.data.reviews
        
-
+        
         const review = new Array()
+        const combined_reviews = new Array()
+        const all_reviews = new Array()
         for(let i = 0; i < data2.length;i++){
             review[i] = [data2[i].id,data2[i].review_title,data2[i].review_text,data2[i].review_total_score,data2[i].restaurant_id]
+            combined_reviews[i] = [""]
          }
-
+     
         //Objects can't be stored as a value in the react select option value field. 
         //To fix this I made an array called "object" that holds each part of the json data,
         //which makes it able to be stored in the options.
@@ -45,11 +45,16 @@ export default class TestSelect extends React.Component{
         for(let i = 0; i < data.length;i++){
            restaurant[i] = [data[i].city,data[i].id,data[i].name,data[i].phone_number,data[i].website]
            for(let k = 0; k < data2.length;k++){
-            if ( data2[k].restaurant_id == data[i].id)
-                restaurant[i].push(review[k])
+            if ( restaurant[i][1] == review[k][4]){
+                combined_reviews[i].push(review[k])
+            }
+
            }
            
+           restaurant[i].push(combined_reviews[i])
         }
+           console.log(restaurant[0])
+           
         //Options has two components the value and the label, this for loop assigns the data we got
         //from the axios request to the value and labels in the options.
         const options = []; 
@@ -75,15 +80,14 @@ export default class TestSelect extends React.Component{
                             website:e.value[4],
                             review_title : "N/A",
                             review_text : "N/A",
-                            review_total_score : "N/A"})
+                            review_total_score : "N/A",
+                            reviews : e.value[5]})
+                           
+                        if(response_len > 5 && e.value[5].length == 1){
                             
-                        if(response_len > 5){
-                            //let i = 5; i < response_len-1;i+
-                                this.setState({
-                                    review_title:e.value[5][1],
-                                    review_text:e.value[5][2],
-                                    review_total_score:e.value[5][3],
-                                })
+                            this.setState({
+                                reviews: (0,("N/A","N/A","N/A","N/A"))
+                            })
                         }}}/>
                 
                     <FetchResturauntName 
@@ -92,9 +96,7 @@ export default class TestSelect extends React.Component{
                     city = {this.state.city} 
                     phonenumber = {this.state.phonenumber} 
                     website = {this.state.website}
-                    review_title = {this.state.review_title}
-                    review_text = {this.state.review_text}
-                    review_total_score = {this.state.review_total_score}>
+                    reviews = {this.state.reviews}>
                     </FetchResturauntName>
                 </div> 
         );
