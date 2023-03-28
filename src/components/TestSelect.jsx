@@ -56,7 +56,6 @@ export default class TestSelect extends React.Component{
         for(let i = 0; i < data.length;i++){
             options[i] = {value : restaurant[i], label: data[i].name}
         }
-        console.log(restaurant)
         this.setState({options_state:options,loading:false})   
     }
     
@@ -67,19 +66,25 @@ export default class TestSelect extends React.Component{
                     className = "select-class"
                     options={this.state.options_state} 
                     onChange={e => {
-                        console.log(e.value[5][1]);
-                        console.log(e.value[5][2]);
-                        console.log(e.value[5][3]);
+                        const response_len = e.value.length
                         this.setState({
                             city:e.value[0],
                             id: e.value[1],
                             names:e.value[2],
                             phonenumber:e.value[3],
                             website:e.value[4],
-                            review_title:e.value[5][1],
-                            review_text:e.value[5][2],
-                            review_total_score:e.value[5][3]})
-                    }}/>
+                            review_title : "N/A",
+                            review_text : "N/A",
+                            review_total_score : "N/A"})
+                            
+                        if(response_len > 5){
+                            //let i = 5; i < response_len-1;i+
+                                this.setState({
+                                    review_title:e.value[5][1],
+                                    review_text:e.value[5][2],
+                                    review_total_score:e.value[5][3],
+                                })
+                        }}}/>
                 
                     <FetchResturauntName 
                     id = {this.state.id}
@@ -91,9 +96,6 @@ export default class TestSelect extends React.Component{
                     review_text = {this.state.review_text}
                     review_total_score = {this.state.review_total_score}>
                     </FetchResturauntName>
-                    
-
-                    
                 </div> 
         );
     }
