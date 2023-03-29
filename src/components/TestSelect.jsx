@@ -72,7 +72,6 @@ export default class TestSelect extends React.Component{
                     className = "select-class"
                     options={this.state.options_state} 
                     onChange={e => {
-                        console.log(e.value[5])
                         const response_len = e.value.length
                         this.setState({
                             city:e.value[0],

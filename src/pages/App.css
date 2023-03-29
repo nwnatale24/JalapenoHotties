@@ -53,6 +53,7 @@
   align-items: center;
   width: 50vw;
   
+  
 }
 .Map {
   text-decoration: none;  
@@ -166,10 +167,17 @@
   background-color: rgb(40,33,30)
 }
 .review-body {
-  
-  background-color: rgb(55, 52, 49);
+
   width: 20em;
   height:25%;
+  
+}
+.review {
+  color:lightgray;
+  background-color: rgb(42, 40, 39);
+  width: 20em;
+  height:25%;
+  
 }
 .title-ptag {
   font-size: 14px;
