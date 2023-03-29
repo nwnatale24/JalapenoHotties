@@ -32,6 +32,7 @@ export default class TestSelect extends React.Component{
         
         const review = new Array()
         const combined_reviews = new Array()
+        const empty = new Array(5).fill("N/A")
         const all_reviews = new Array()
         for(let i = 0; i < data2.length;i++){
             review[i] = [data2[i].id,data2[i].review_title,data2[i].review_text,data2[i].review_total_score,data2[i].restaurant_id]
@@ -50,10 +51,10 @@ export default class TestSelect extends React.Component{
             }
 
            }
-           
+           combined_reviews[i].shift()
            restaurant[i].push(combined_reviews[i])
         }
-           console.log(restaurant[0])
+           
            
         //Options has two components the value and the label, this for loop assigns the data we got
         //from the axios request to the value and labels in the options.
@@ -78,15 +79,11 @@ export default class TestSelect extends React.Component{
                             names:e.value[2],
                             phonenumber:e.value[3],
                             website:e.value[4],
-                            review_title : "N/A",
-                            review_text : "N/A",
-                            review_total_score : "N/A",
                             reviews : e.value[5]})
                            
-                        if(response_len > 5 && e.value[5].length == 1){
-                            
+                        if(e.value[5].length == 0){
                             this.setState({
-                                reviews: (0,("N/A","N/A","N/A","N/A"))
+                                reviews : [["N/A","N/A","N/A","N/A","N/A"]]
                             })
                         }}}/>
                 
