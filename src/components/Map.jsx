@@ -24,14 +24,14 @@ export default class Map extends React.Component{
                 <div className="map">
                 <div className="google-map">
                     <GoogleMapReact
-                    bootstrapURLKeys={{ key: '' }}
-                    defaultCenter={{ lat: 39.9355, lng: -75.1587 }}
-                    defaultZoom={0}
+                    bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY}}
+                    defaultCenter={{ lat: 39.710117443535886, lng: -75.11916101566422 }}
+                    defaultZoom={15}
                     >
                         <AnyReactComponent
-                            lat={59.955413}
-                            lng={30.337844}
-                            text="My Marker"
+                            lat={39.710117443535886}
+                            lng={-75.11916101566422}
+                            text="Rowan University"
                         />
                     </GoogleMapReact>
                 </div> 
