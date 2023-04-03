@@ -3,8 +3,8 @@ import { Account } from "./pages/Account"
 import { Home } from "./pages/Home"
 import { TabsLinks } from "./pages/TabsLinks"
 import { useEffect } from "react"
-import jwt_decode from "jwt-decode" 
-
+import jwt_decode from "jwt-decode"
+ 
 function App() {
 
   /* this function below logs the output information of the user 
@@ -34,7 +34,7 @@ function App() {
 
     google.accounts.id.renderButton(
       document.getElementById("signInDiv"),
-      { theme: "outline", size: "large"}
+      { theme: "outline", size: "small"}
 
     );
 
