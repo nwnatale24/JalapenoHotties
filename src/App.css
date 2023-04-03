@@ -24,4 +24,28 @@
   background-color: rgb(40,33,30)!important;
 }
 
+.map {
+  
+  height: 50%;
+  width: 100%;
+}
+
+
+.google-map {
+  justify-content:center;
+  height: 22em;
+  width: 45em;
+}
+
+.pin {
+  display: flex;
+  align-items: center;
+  width: 180px;
+  color: var(--main-blue);
+}
+
+.pin-icon {
+  font-size: 4rem;
+}
+
 
