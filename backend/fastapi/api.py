@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import create_engine, Table, MetaData, insert, Column, String, Integer, Date
+from sqlalchemy import create_engine, Table, MetaData, insert, Column, String, Integer, Date, Double
 from helpers.clean_nulls import replace_none_values
 from helpers.get_date_info import *
 from datetime import datetime
@@ -29,6 +29,9 @@ restaurant_table = Table(
     Column("name", String(45), nullable=True), 
     Column("website", String(45), nullable=True),
     Column("phone_number", String(45), nullable=True),
+    Column("latitude", Double(), nullable=True),
+    Column("longitude", Double(), nullable=True)
+    
     )
 
 # Create a Review object that represents the "review" table in the DB.
@@ -510,13 +513,17 @@ async def get_all_resurants():
             restaurant_name= row[2]
             restaurant_website = row[3]
             restaurant_phone_number = row[4]
+            latitude = row[5]
+            longitude = row[6]
 
             matches["restaurants"].append({
                                 "id" : restaurant_id,
                                 "city" : restaurant_city,
                                 "name" : restaurant_name,
                                 "website" : restaurant_website,
-                                "phone_number" : restaurant_phone_number
+                                "phone_number" : restaurant_phone_number,
+                                "latitide" : latitude,
+                                "longitude" : longitude
                 
              })
 
@@ -573,13 +580,17 @@ async def post_restaurant( city: str, name: str, website: str, phone_number: str
             restaurant_name= row[2]
             restaurant_website = row[3]
             restaurant_phone_number = row[4]
+            latitude = row[5]
+            longitude = row[6]
 
             matches["restaurants"].append({
                                 "id" : restaurant_id,
                                 "city" : restaurant_city,
                                 "name" : restaurant_name,
                                 "website" : restaurant_website,
-                                "phone_number" : restaurant_phone_number
+                                "phone_number" : restaurant_phone_number,
+                                "latitide" : latitude,
+                                "longitude" : longitude
                 
              })
         
@@ -617,13 +628,17 @@ async def get_resurant_by_name(name):
             restaurant_name= row[2]
             restaurant_website = row[3]
             restaurant_phone_number = row[4]
+            latitude = row[5]
+            longitude = row[6]
 
             matches["restaurants"].append({
                                 "id" : restaurant_id,
                                 "city" : restaurant_city,
                                 "name" : restaurant_name,
                                 "website" : restaurant_website,
-                                "phone_number" : restaurant_phone_number
+                                "phone_number" : restaurant_phone_number,
+                                "latitide" : latitude,
+                                "longitude" : longitude
                 
              })
 
@@ -659,13 +674,17 @@ async def get_restaurant_by_restaurant_id(restaurant_id):
             restaurant_name= row[2]
             restaurant_website = row[3]
             restaurant_phone_number = row[4]
+            latitude = row[5]
+            longitude = row[6]
 
             matches["restaurants"].append({
                                 "id" : restaurant_id,
                                 "city" : restaurant_city,
                                 "name" : restaurant_name,
                                 "website" : restaurant_website,
-                                "phone_number" : restaurant_phone_number
+                                "phone_number" : restaurant_phone_number,
+                                "latitide" : latitude,
+                                "longitude" : longitude
                 
              })
 
