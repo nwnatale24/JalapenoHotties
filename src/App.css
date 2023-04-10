@@ -2,15 +2,14 @@
   text-align: center;
 }
 
-.testInput{
+.testInput {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.testInput input{
+.testInput input {
   width: 350px;
-
 }
 
 .restaurant-dropdown {
@@ -18,21 +17,20 @@
 }
 
 .select-class {
-  color:black;
+  color: black;
 }
+
 .select-class:hover {
-  background-color: rgb(40,33,30)!important;
+  background-color: rgb(40, 33, 30) !important;
 }
 
 .map {
-  
   height: 50%;
   width: 100%;
 }
 
-
 .google-map {
-  justify-content:center;
+  justify-content: center;
   height: 22em;
   width: 45em;
 }
@@ -47,5 +45,3 @@
 .pin-icon {
   font-size: 4rem;
 }
-
-
