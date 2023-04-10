@@ -1,28 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../App.css';
-import { Link } from "react-router-dom"
-import { useState } from 'react';
 import Review from './Review';
-function FetchResturauntName(props){
-    const [isToggled, setIsToggled] = useState(false)
 
-return (
+function FetchRestaurantName(props) {
+  const [isToggled, setIsToggled] = useState(false);
+
+  return (
     <div>
-        <div className = "Description">
-            <p>Resturaunt Name     : {props.names}</p>
-            <p>City                : {props.city}</p>
-            <p>Phone Number        : {props.phonenumber}</p>
-            <p>website             : {props.website}</p> 
-            <div className='Review-button' onClick={() => setIsToggled(!isToggled)}>
-                Reviews
-            </div> 
+      <div className="Description">
+        <p>Restaurant Name: {props.names}</p>
+        <p>City: {props.city}</p>
+        <p>Phone Number: {props.phoneNumber}</p>
+        <p>Website: {props.website}</p>
+        <div className="Review-button" onClick={() => setIsToggled(!isToggled)}>
+          Reviews
         </div>
-        { isToggled && 
-        <Review 
-        reviews = {props.reviews}
-        /> } 
+      </div>
+      {isToggled && <Review reviews={props.reviews} />}
     </div>
-)
+  );
 }
-  
-export default FetchResturauntName;
+
+export default FetchRestaurantName;
