@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
 import '../App.css';
-
+//Testing for review
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 class Map extends Component {

@@ -7,7 +7,7 @@ from helpers.get_date_info import *
 from datetime import datetime
 
 app = FastAPI()
-engine = create_engine('mysql+mysqlconnector://root:password@localhost:3306/jh')
+engine = create_engine('mysql+mysqlconnector://root:feLipe1012!@localhost:3306/jh')
 metadata = MetaData()
 
 origins = ["*"]
