@@ -281,7 +281,7 @@ async def get_user_by_full_name(full_name):
         first_name = first_and_last_name_array[0]
         last_name = first_and_last_name_array[1]
 
-        # Execute a SELECT query on the "restaurant" table
+        # Execute a SELECT query on the "users" table
         select_query = user_table.select().where(user_table.c.first_name == first_name).where(user_table.c.last_name == last_name)
         results = conn.execute(select_query)
 
