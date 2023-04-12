@@ -218,6 +218,51 @@ async def get_user_by_user_id(user_id):
     except Exception as e:
         return {"status" : "fail",
                 "message" : str(e)}
+    
+# Endpoint for GET request to return JSON of user and it's attributes, searched by email_address.
+@app.get("/api/users/email/{email_address}") 
+async def get_user_by_email_address(email_address):
+    try:
+
+        # Open a conection to the DB.
+        conn = engine.connect()
+
+        # Execute a SELECT query on the "user" table
+        select_query = user_table.select().where(user_table.c.email_address == email_address)
+        results = conn.execute(select_query)
+
+        # Header for the matches dict.
+        matches = {"status" : "success",
+                    "message" : "null",
+                    "users" : []}
+                    
+        # Create an array of dicts containing the results.
+        for row in results:
+            user_id = row[0]
+            first_name = row[1]
+            last_name= row[2]
+            email_address = row[3]
+            user_rank = row[4]
+            user_image = row[5]
+
+            matches["users"].append({
+                                "id" : user_id,
+                                "first_name" : first_name,
+                                "last_name" : last_name,
+                                "email_address" : email_address,
+                                "user_rank" : user_rank,
+                                "user_image" : user_image
+                
+             })
+
+        # Close the connection to the DB. 
+        conn.close()
+
+        return(matches)
+        
+    except Exception as e:
+        return {"status" : "fail",
+                "message" : str(e)}
 
 # Endpoint for GET request to return JSON of user and it's attributes, searched by user_id.
 @app.get("/api/users/full_name/{full_name}") 
@@ -236,7 +281,7 @@ async def get_user_by_full_name(full_name):
         first_name = first_and_last_name_array[0]
         last_name = first_and_last_name_array[1]
 
-        # Execute a SELECT query on the "restaurant" table
+        # Execute a SELECT query on the "users" table
         select_query = user_table.select().where(user_table.c.first_name == first_name).where(user_table.c.last_name == last_name)
         results = conn.execute(select_query)
 
