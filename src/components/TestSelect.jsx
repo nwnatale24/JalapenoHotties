@@ -17,7 +17,9 @@ export default class TestSelect extends React.Component{
         phonenumber: "Loading...",
         website: "Loading...",
         id : "N/A",
-        reviews : []
+        reviews : [],
+        latitide: "N/A",
+        longitude: "N/A"
         
     }
 
@@ -25,7 +27,6 @@ export default class TestSelect extends React.Component{
 
         const answer = await axios.get("http://127.0.0.1:8000/api/restaurants");
         const data = await answer.data.restaurants
-
         const answer2 = await axios.get("http://127.0.0.1:8000/api/reviews");
         const data2 = await answer2.data.reviews
        
@@ -44,7 +45,7 @@ export default class TestSelect extends React.Component{
         //which makes it able to be stored in the options.
         const restaurant = new Array()
         for(let i = 0; i < data.length;i++){
-           restaurant[i] = [data[i].city,data[i].id,data[i].name,data[i].phone_number,data[i].website]
+           restaurant[i] = [data[i].city,data[i].id,data[i].name,data[i].phone_number,data[i].website,data[i].latitide,data[i].longitude]
            for(let k = 0; k < data2.length;k++){
             if ( restaurant[i][1] == review[k][4]){
                 combined_reviews[i].push(review[k])
@@ -79,7 +80,10 @@ export default class TestSelect extends React.Component{
                             names:e.value[2],
                             phonenumber:e.value[3],
                             website:e.value[4],
-                            reviews : e.value[5]})
+                            reviews : e.value[7],
+                            latitide: e.value[5],
+                            longitude: e.value[6]
+                            })
                            
                         if(e.value[5].length == 0){
                             this.setState({
