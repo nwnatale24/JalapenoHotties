@@ -70,7 +70,7 @@ export function Home() {
         </div>
       </div>
       <div className = "Popup">
-          <Map/>
+          
           <TestSelect/>
           
       </div>

@@ -5,7 +5,7 @@ import Select from "react-select";
 import FetchResturauntName from './RestaurantDescription';
 import e from 'cors';
 import { Link } from 'react-router-dom';
-
+import Map from './Map';
 export default class TestSelect extends React.Component{
     
     
@@ -18,8 +18,8 @@ export default class TestSelect extends React.Component{
         website: "Loading...",
         id : "N/A",
         reviews : [],
-        latitide: "N/A",
-        longitude: "N/A"
+        latitide: 39.710117443535886,
+        longitude: -75.11916101566422
         
     }
 
@@ -69,6 +69,7 @@ export default class TestSelect extends React.Component{
     render() {
         return (
                 <div>
+                    <Map latitide={this.state.latitide} longitude={this.state.longitude} names = {this.state.names} />
                     <Select 
                     className = "select-class"
                     options={this.state.options_state} 
