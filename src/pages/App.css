@@ -172,6 +172,11 @@
   height: 15em;
   overflow-y: auto;
 }
+.restaurant-body {
+  width: 100%;
+  height: 50vh;
+  overflow-y: auto;
+}
 .review {
   color:lightgray;
   background-color: rgb(77, 77, 82);

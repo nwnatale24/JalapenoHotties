@@ -5,8 +5,7 @@ import { Link, Route, Routes } from "react-router-dom"
 import axios from 'axios'
 import FetchResturauntName from '../components/RestaurantDescription';
 import TestSelect from '../components/TestSelect.jsx';
-import Map from '../components/Map.jsx'
-
+import RestaurantList from '../components/RestaurantList';
 // Sample API get call with a button to get the list of resturants. 
 // Outputs the results of the API call to the console log.
 // Can see the reponse using inspect element in Chrome. 
@@ -70,9 +69,12 @@ export function Home() {
         </div>
       </div>
       <div className = "Popup">
-          
+        <div className="restaurant-body">
+          <RestaurantList/>
+        </div>  
+      </div>
+      <div className = "Popup">
           <TestSelect/>
-          
       </div>
       <div className = "Filters">
         <div className = "FilterItems">
