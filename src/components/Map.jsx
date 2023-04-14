@@ -1,45 +1,26 @@
 import React from 'react'
 import GoogleMapReact from 'google-map-react'
-import axios from 'axios'
 import '../App.css'
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-export default class Map extends React.Component{
-
+export default function Map(props){
     
+    const AnyReactComponent = ({text}) => <div className='marker'>{text}</div>;
 
-    async getCoordinates() {
-        const answer = await axios.get("http://127.0.0.1:8000/api/restaurants");
-        const data = await answer.data.restaurants 
-
-        
-        
-    }
-
-    render() { 
-        
-        return(
-             
-                <div className="map">
-                <div className="google-map">
+        return(    
+                <div className="Map">
+                
                     <GoogleMapReact
                     bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY}}
-                    defaultCenter={{ lat: 39.710117443535886, lng: -75.11916101566422 }}
-                    defaultZoom={15}
+                    defaultCenter={{ lat: props.latitide, lng: props.longitude }}
+                    defaultZoom={8.8}
                     >
                         <AnyReactComponent
-                            lat={39.710117443535886}
-                            lng={-75.11916101566422}
-                            text="Rowan University"
+                            lat={props.latitide}
+                            lng={props.longitude}
+                            text={Array.from(props.names)[0]}
+                            
                         />
                     </GoogleMapReact>
                 </div> 
-                
-                </div>
-                
-            
         )
     }
-
-}
