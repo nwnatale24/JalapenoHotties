@@ -243,7 +243,7 @@
   flex-direction: row;
 }
 .review-sort-buttons {
-  width: 33.33%;
+  width: 20%;
   color:lightgray;
   background-color: rgb(25,18,17);
   text-decoration: none;
