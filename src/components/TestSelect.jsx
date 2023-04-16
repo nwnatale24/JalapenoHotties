@@ -19,7 +19,8 @@ export default class TestSelect extends React.Component{
         id : "N/A",
         reviews : [],
         latitide: 39.710117443535886,
-        longitude: -75.11916101566422
+        longitude: -75.11916101566422,
+        timestamp: "N/A"
         
     }
 
@@ -36,7 +37,7 @@ export default class TestSelect extends React.Component{
         const empty = new Array(5).fill("N/A")
         const all_reviews = new Array()
         for(let i = 0; i < data2.length;i++){
-            review[i] = [data2[i].id,data2[i].review_title,data2[i].review_text,data2[i].review_total_score,data2[i].restaurant_id]
+            review[i] = [data2[i].id,data2[i].review_title,data2[i].review_text,data2[i].review_total_score,data2[i].restaurant_id,data2[i].timestamp]
             combined_reviews[i] = [""]
          }
      

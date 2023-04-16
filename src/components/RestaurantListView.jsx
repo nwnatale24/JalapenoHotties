@@ -54,9 +54,9 @@ function RestaurantListView(props){
 return (
     
     <div className='Popup2'>
-        <button className='norm-button' onClick={() => setUnsorted(!isUnsorted)}>Unsorted Restaurant Listings</button>
-        <button className='norm-button' onClick={() => setHighLow(!isHighLow)}>Highest to Lowest Rated Restaurants</button>
-        <button className='norm-button' onClick={() => setLowHigh(!isLowHigh)}>Lowest to Highested Rated Restaurants</button>
+        <button className='norm-button' onClick={() => {setUnsorted(!isUnsorted);setHighLow(false);setLowHigh(false)}}>Unsorted Restaurant Listings</button>
+        <button className='norm-button' onClick={() => {setHighLow(!isHighLow);setUnsorted(false);setLowHigh(false)}}>Highest to Lowest Rated Restaurants</button>
+        <button className='norm-button' onClick={() => {setLowHigh(!isLowHigh);setUnsorted(false);setHighLow(false)}}>Lowest to Highested Rated Restaurants</button>
         { isHighLow && 
         <div className='restaurant-body'>{high_low_list}</div>
         }

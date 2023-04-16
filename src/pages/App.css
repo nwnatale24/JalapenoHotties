@@ -236,3 +236,20 @@
   font-size:18px;
   font-weight:bold;
 }
+.button-body {
+  width: 100%;
+  height:1em;
+  
+  flex-direction: row;
+}
+.review-sort-buttons {
+  width: 20%;
+  color:lightgray;
+  background-color: rgb(25,18,17);
+  text-decoration: none;
+  outline-color: rgb(25,18,17);;
+}
+.review-sort:hover {
+  text-decoration: none;  
+  background-color: rgb(40,33,30)
+}
