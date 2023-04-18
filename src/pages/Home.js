@@ -92,8 +92,6 @@ export function Home() {
         <div className = "FilterItems">
           Takout
         </div>
-        <div id="signInDiv">
-        Google Sign In</div>
       </div>
     </div>
   </div>
