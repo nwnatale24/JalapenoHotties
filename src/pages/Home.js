@@ -40,6 +40,16 @@ function postResturant(restaurant_name, restaurant_website) {
 
 export function Home() {
 
+  /* get the user_id of the current logged in user from the 
+     query parameter. 
+  */
+
+     const queryParams = new URLSearchParams(window.location.search)
+     const user_id = queryParams.get("id");
+     console.log(user_id);
+
+     const url = `/Account/?id=${user_id}`;
+
   return (
   <div>
     <div className = "header-container">
@@ -57,7 +67,7 @@ export function Home() {
     <div className = "body-container">
       <div className = "LeftToolbar">
         <div className = "Account">
-            <Link className="Account" style={{textdecoration:'none'}} to="/Account">Account</Link>
+            <Link className="Account" style={{textdecoration:'none'}} to={url}>Account</Link>
         </div>
         <div className = "TabsLinks">
             <Link className="TabsLinks" style={{textdecoration:'none'}}to="/TabsLinks">TabsLinks</Link>
