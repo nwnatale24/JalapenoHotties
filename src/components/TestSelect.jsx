@@ -3,9 +3,14 @@ import '../App.css';
 import axios from 'axios'
 import Select from "react-select";
 import FetchResturauntName from './RestaurantDescription';
+import Modal from './Modal';
 import e from 'cors';
 import { Link } from 'react-router-dom';
 import Map from './Map';
+const queryParams = new URLSearchParams(window.location.search)
+    const user_id = queryParams.get("id");
+    console.log(user_id);
+
 export default class TestSelect extends React.Component{
     
     
@@ -20,7 +25,8 @@ export default class TestSelect extends React.Component{
         reviews : [],
         latitide: 39.710117443535886,
         longitude: -75.11916101566422,
-        timestamp: "N/A"
+        timestamp: "N/A",
+        userId: "N/A"
         
     }
 
@@ -64,7 +70,7 @@ export default class TestSelect extends React.Component{
         for(let i = 0; i < data.length;i++){
             options[i] = {value : restaurant[i], label: data[i].name}
         }
-        this.setState({options_state:options,loading:false})   
+        this.setState({options_state:options,loading:false,userId: user_id})   
     }
     
     render() {
@@ -94,6 +100,7 @@ export default class TestSelect extends React.Component{
                         }}}/>
                 
                     <FetchResturauntName 
+                    user = {this.state.userId}
                     id = {this.state.id}
                     names = {this.state.names} 
                     city = {this.state.city} 
@@ -101,6 +108,7 @@ export default class TestSelect extends React.Component{
                     website = {this.state.website}
                     reviews = {this.state.reviews}>
                     </FetchResturauntName>
+                    
                 </div> 
         );
     }
