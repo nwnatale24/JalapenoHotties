@@ -7,74 +7,91 @@ import RestaurantSelect from "./RestaurantSelect";
 import RestaurantDropdown from './RestaurantDropdown';
 import { useEffect } from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom/client';
 
 
 
 
 function ShowModal(props){
-    const user_id = props.user;
-    const review_id = props.rest_id;
-    const [openModal, setOpenModal] = useState(false);
-    const [restaurant, restaurantChange] = useState();
-    const [options, setOptions] = useState([]);
+   const [inputs, setInputs] = useState({});
 
-    useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/restaurants")
-        .then((response)=> response.json())
-        .then((data) => {
-            setOptions(
-                data.map((entry) => {
-                    var singleObj = {};
-                    singleObj["label"] = entry;
-                    singleObj["value"] = entry;
-                    return singleObj;
-                })
-            );
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}))
+  }
 
-        }).catch(error => {
-            console.error(error);
-        })
-    }, []);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert(inputs);
+    const test = inputs;
+    test.rid = props.rest_id;
+    test.user = props.user;
+    console.log(test[0]);
+    var bodyFormData = new FormData();
+    bodyFormData.append('review_title',  test.title);
+    bodyFormData.append('review_text',  test.description);
+    bodyFormData.append('review_total_score', test.score);
+    bodyFormData.append('user_id', test.user);
+    bodyFormData.append('restaurant_id',  test.rid);
+    console.log(bodyFormData);
 
-    return (
-
-        <div>
-            <form>
-            <lable htmlFor="review_title">Review Title</lable>
-            <br></br>
-                <textarea
-                    plaeholder="Review Title"
-                    id="review_title"
-                    name="review_title"
-                />
-                <br></br>
-            <lable htmlFor="review_text">Review</lable>
-                <br></br>
-                <textarea
-                    plaeholder="What did you think?"
-                    id="review_text"
-                    name="review_text"
-                />
-                <br></br>
-                <label htmlFor="review_total_score">Review Score</label>
-                <br></br>
-                Score (1-5)
-                <input
-                    type="number"
-                    placeholder="Score (1-5)"
-                    id="review_total_score"
-                    name="review_total_score"
-                    autoComplete="off"
-                    min="1"
-                    max="5"
-                />
-                <br></br>
-                <input type="submit" value="Submit"></input>
-            </form>
-                
-        </div>
-    )
-
+    const config = {     
+        headers: { 'content-type': 'multipart/form-data' }
+    }
+    const s1 = '' + test.title;
+    const s2 = '' + test.description;
+    const s3 = '' + test.score;
+    const s4 = '' + test.user;
+    const s5 = '' + test.rid;
+    const url = 'http://127.0.0.1:8000/api/reviews?review_title='+ s1 + '&review_text=' + s2 + '&review_total_score=' + s3 + '&user_id=' + s4 + '&restaurant_id=' + s5;
+    axios.post(url, bodyFormData, config)
+    .then(response => {
+        console.log(response);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+    console.log(bodyFormData);
 }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>Reviw Title:
+      <input 
+        type="text" 
+        name="title" 
+        value={inputs.title || ""} 
+        onChange={handleChange}
+      />
+      </label>
+      <br></br>
+      <label>Description
+        <input 
+          type="text" 
+          name="description" 
+          value={inputs.description || ""} 
+          onChange={handleChange}
+        />
+        </label>
+        <br></br>
+        <label>Score:
+        <input 
+          type="number" 
+          name="score" 
+          value={inputs.score || ""} 
+          onChange={handleChange}
+        />
+        </label>
+        <br></br>
+        <input type="submit" />
+    </form>
+  )
+}
+
+
+
+
+
 
 export default ShowModal;
