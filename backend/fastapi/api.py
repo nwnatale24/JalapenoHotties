@@ -7,7 +7,7 @@ from helpers.get_date_info import *
 from datetime import datetime
 
 app = FastAPI()
-engine = create_engine('mysql+mysqlconnector://root:password@localhost:3306/jh')
+engine = create_engine('mysql+mysqlconnector://root:Password123@localhost:3307/jh')
 metadata = MetaData()
 
 origins = ["*"]
@@ -55,9 +55,7 @@ user_table = Table(
     Column("user_id", Integer, primary_key=True),
     Column("first_name", String(45), nullable=True),
     Column("last_name", String(45), nullable=True), 
-    Column("email_address", String(45), nullable=True),
-    Column("user_rank", String(45), nullable=True),
-    Column("user_image", String(100), nullable=True) # TODO: Need to change from String to access image ...
+    Column("email_address", String(45), nullable=True)
     )
 
 metadata.create_all(engine)
@@ -85,16 +83,14 @@ async def get_all_users():
             first_name = row[1]
             last_name= row[2]
             email_address = row[3]
-            user_rank = row[4]
-            user_image = row[5]
+
 
             matches["users"].append({
                                 "id" : user_id,
                                 "first_name" : first_name,
                                 "last_name" : last_name,
-                                "email_address" : email_address,
-                                "user_rank" : user_rank,
-                                "user_image" : user_image
+                                "email_address" : email_address
+
                 
              })
 
@@ -122,8 +118,7 @@ async def post_user(email_address: str, first_name: str, last_name: str):
             first_name=first_name,
             last_name=last_name, 
             email_address=email_address,
-            user_rank="",
-            user_image=""
+
         )
 
 
@@ -152,16 +147,13 @@ async def post_user(email_address: str, first_name: str, last_name: str):
             first_name = row[1]
             last_name= row[2]
             email_address = row[3]
-            user_rank = row[4]
-            user_image = row[5]
+
 
             matches["users"].append({
                                 "id" : user_id,
                                 "first_name" : first_name,
                                 "last_name" : last_name,
-                                "email_address" : email_address,
-                                "user_rank" : user_rank,
-                                "user_image" : user_image
+                                "email_address" : email_address
                 
              })
 
@@ -197,16 +189,13 @@ async def get_user_by_user_id(user_id):
             first_name = row[1]
             last_name= row[2]
             email_address = row[3]
-            user_rank = row[4]
-            user_image = row[5]
+
 
             matches["users"].append({
                                 "id" : user_id,
                                 "first_name" : first_name,
                                 "last_name" : last_name,
-                                "email_address" : email_address,
-                                "user_rank" : user_rank,
-                                "user_image" : user_image
+                                "email_address" : email_address
                 
              })
 
@@ -242,16 +231,14 @@ async def get_user_by_email_address(email_address):
             first_name = row[1]
             last_name= row[2]
             email_address = row[3]
-            user_rank = row[4]
-            user_image = row[5]
+
 
             matches["users"].append({
                                 "id" : user_id,
                                 "first_name" : first_name,
                                 "last_name" : last_name,
-                                "email_address" : email_address,
-                                "user_rank" : user_rank,
-                                "user_image" : user_image
+                                "email_address" : email_address
+
                 
              })
 
@@ -296,16 +283,13 @@ async def get_user_by_full_name(full_name):
             first_name = row[1]
             last_name= row[2]
             email_address = row[3]
-            user_rank = row[4]
-            user_image = row[5]
+
 
             matches["users"].append({
                                 "id" : user_id,
                                 "first_name" : first_name,
                                 "last_name" : last_name,
-                                "email_address" : email_address,
-                                "user_rank" : user_rank,
-                                "user_image" : user_image
+                                "email_address" : email_address
                 
              })
 
