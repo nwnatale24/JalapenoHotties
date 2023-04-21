@@ -2,7 +2,7 @@ import React from 'react'
 import '../App.css';
 import { Link } from "react-router-dom"
 import { useState } from 'react';
-import Modal from 'react-modal';
+
 import RestaurantSelect from "./RestaurantSelect";
 import RestaurantDropdown from './RestaurantDropdown';
 import { useEffect } from 'react';
@@ -23,18 +23,18 @@ function ShowModal(props){
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(inputs);
+    
     const test = inputs;
     test.rid = props.rest_id;
     test.user = props.user;
-    console.log(test[0]);
+    
     var bodyFormData = new FormData();
     bodyFormData.append('review_title',  test.title);
     bodyFormData.append('review_text',  test.description);
     bodyFormData.append('review_total_score', test.score);
     bodyFormData.append('user_id', test.user);
     bodyFormData.append('restaurant_id',  test.rid);
-    console.log(bodyFormData);
+    
 
     const config = {     
         headers: { 'content-type': 'multipart/form-data' }
@@ -52,7 +52,7 @@ function ShowModal(props){
     .catch(error => {
         console.log(error);
     });
-    console.log(bodyFormData);
+    
 }
 
   return (

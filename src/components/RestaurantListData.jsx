@@ -71,7 +71,7 @@ export default class RestaurantList extends React.Component{
                 for(let k = 0; k < num_reviews; k++){
                         sum = sum + restaurant_not_sorted[i][7][k][3]
                 }
-                average_review_score = sum/num_reviews
+                average_review_score = Math.round(sum/num_reviews)
                 restaurant_not_sorted[i].push(average_review_score)
                 sum = 0
                 num_reviews = 0

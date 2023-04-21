@@ -1,3 +1,5 @@
+import AccountInfo from '../components/Account'
+
 export function Account() {
 
   /* get the user_id of the current logged in user from the 
@@ -13,7 +15,9 @@ export function Account() {
             <div className="header-container">
                 <div className="Title">Account</div>
             </div>
-            <div className="body-container"></div>
+            <div className="body-container">
+                <AccountInfo user={user_id} />
+            </div>
         </div>
     )
 }
