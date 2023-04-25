@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../App.css';
 
 
+//Need to be moved all into TestSelect?? for axios responses
+
 function Marker(props){
     //states for different radii 
     const [isOneMile, setOneMile] = useState(false);
@@ -46,6 +48,9 @@ function Marker(props){
                 <button onClick={() => {setTenMile(!isTenMile); setOneMile(false); setFiveMile(false)}}>Restaurants within 10 Miles</button>
             </div>
 
+            { isOneMile && <div>{markerDisplay(one_mile)}</div> }
+            { isFiveMile && <div>{markerDisplay(five_mile)}</div> }
+            { isTenMile && <div>{markerDisplay(ten_mile)}</div> }
         </div>
     )
 }
