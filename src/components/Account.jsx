@@ -26,7 +26,7 @@ export default class AccountInfo extends React.Component {
     let review_arr = response2.map(obj => Object.values(obj));
     let restaurant_arr = response3.map(obj => Object.values(obj));
 
-    console.log(typeof review_arr[0][6]);
+    
     console.log(typeof restaurant_arr[0][0]);
 
     for (let i = 0; i < review_arr.length; i++) {
