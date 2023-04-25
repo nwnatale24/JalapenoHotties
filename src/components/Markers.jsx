@@ -21,7 +21,33 @@ function Marker(props){
     */
     const toSorted = (arr, compareFn) => [...arr].sort(compareFn);
 
-    const one_mile = toSorted(restaurants, (a, b) => (a.lat - b.lat && a.lng - b.lng));
-    const five_mile = toSorted(restaurants, (a, b) => (a.lat - b.lat && a.lng - b.lng));
-    const ten_mile = toSorted(restaurants, (a, b) => (a.lat - b.lat && a.lng - b.lng));
+    //logic below is placeholder
+    const one_mile = toSorted(restPins, (a, b) => (a.lat - b.lat && a.lng - b.lng));
+    const five_mile = toSorted(restPins, (a, b) => (a.lat - b.lat && a.lng - b.lng));
+    const ten_mile = toSorted(restPins, (a, b) => (a.lat - b.lat && a.lng - b.lng));
+
+
+    const markerDisplay = (restaurants) => (
+        restaurants.map(restaurant => (
+            <div className='marker'>
+                <p><b>Name: </b> {restaurant.name}</p>
+            </div>
+        ))
+    );
+
+
+    return(
+        <div>
+
+
+            <div className="button-body">
+                <button onClick={() => {setOneMile(!isOneMile); setFiveMile(false); setTenMile(false)}}>Restaurants within 1 Mile</button>
+                <button onClick={() => {setFiveMile(!isFiveMile); setOneMile(false); setTenMile(false)}}>Restaurants within 5 Miles</button>
+                <button onClick={() => {setTenMile(!isTenMile); setOneMile(false); setFiveMile(false)}}>Restaurants within 10 Miles</button>
+            </div>
+
+        </div>
+    )
 }
+
+export default Marker;
