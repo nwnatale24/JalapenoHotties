@@ -5,6 +5,7 @@ import FetchResturauntName from './RestaurantDescription';
 import Modal from './Modal';
 import { Link } from 'react-router-dom';
 import Map from './Map';
+import Marker from './Markers'
 
 const queryParams = new URLSearchParams(window.location.search);
 const user_id = queryParams.get("id");
@@ -22,7 +23,8 @@ export default class TestSelect extends Component {
     latitide: 39.710117443535886,
     longitude: -75.11916101566422,
     timestamp: "N/A",
-    userId: user_id
+    userId: user_id,
+    map_state : []
   };
 
   async componentDidMount() {
@@ -30,6 +32,23 @@ export default class TestSelect extends Component {
     const data = answer.data.restaurants;
     const answer2 = await axios.get("http://127.0.0.1:8000/api/reviews");
     const data2 = answer2.data.reviews;
+
+
+    //data for lat/lng for map
+    const pins = [];
+    for(let i = 0; i < data.length; i++){
+      pins[i] = [
+        data[i].name,
+        data[i].latitide,
+        data[i].longitude
+      ];
+    }
+
+    //console log lats/longs
+    for (let i = 0; i < pins.length; i++){
+      console.log(pins[i][1] + ", " + pins[i][2]);
+      
+    }
     
     const review = [];
     const combined_reviews = new Array(data2.length).fill([]);
@@ -60,12 +79,15 @@ export default class TestSelect extends Component {
       label: restaurant.name
     }));
 
+    
+
     this.setState({
       options_state: options,
       loading: false
     });   
   }
 
+  //Added all_pins array as prop passed to <Map />
   render() {
     return (
       <div>
@@ -73,7 +95,10 @@ export default class TestSelect extends Component {
           latitide={this.state.latitide}
           longitude={this.state.longitude}
           names={this.state.names}
+          options={this.state.map_state}
+          all_pins={this.pins}
         />
+        
         <Select
           className="select-class"
           options={this.state.options_state}

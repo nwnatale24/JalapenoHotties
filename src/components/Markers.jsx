@@ -34,6 +34,7 @@ function Marker(props){
             <div className='marker'>
                 <p><b>Name: </b> {restaurant.name}</p>
             </div>
+            
         ))
     );
 

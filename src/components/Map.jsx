@@ -6,6 +6,8 @@ import Marker from './Markers'
 export default function Map(props) {
   const AnyReactComponent = ({ text }) => <div className="marker">{text}</div>;
 
+  
+
   return (
     <div className="Map">
       <GoogleMapReact
@@ -14,7 +16,9 @@ export default function Map(props) {
         defaultZoom={8.8}
       >
         <AnyReactComponent lat={props.latitide} lng={props.longitude} text={Array.from(props.names)[0]} />
+        
       </GoogleMapReact>
+      
     </div>
   );
 }
