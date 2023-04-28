@@ -5,8 +5,7 @@ import FetchResturauntName from './RestaurantDescription';
 import Modal from './Modal';
 import { Link } from 'react-router-dom';
 import Map from './Map';
-import Marker from './Markers';
-
+import Marker from './Markers'
 
 const queryParams = new URLSearchParams(window.location.search);
 const user_id = queryParams.get("id");
@@ -21,11 +20,11 @@ export default class TestSelect extends Component {
     website: "Loading...",
     id: "N/A",
     reviews: [],
-    latitude: 39.710117443535886,
+    latitide: 39.710117443535886,
     longitude: -75.11916101566422,
     timestamp: "N/A",
     userId: user_id,
-    map_state: [],
+    map_state : []
   };
 
   async componentDidMount() {
@@ -34,38 +33,41 @@ export default class TestSelect extends Component {
     const answer2 = await axios.get("http://127.0.0.1:8000/api/reviews");
     const data2 = answer2.data.reviews;
 
-    // data for lat/lng for map
+
+    //data for lat/lng for map
     const pins = [];
-    for (let i = 0; i < data.length; i++) {
+    for(let i = 0; i < data.length; i++){
       pins[i] = {
         name: data[i].name,
-        latitude: data[i].latitude,
-        longitude: data[i].longitude,
+        latitide: data[i].latitide,
+        longitude: data[i].longitude
       };
+      //computations
     }
-
-    // console log lats/longs
-    for (let i = 0; i < pins.length; i++) {
-      console.log(pins[i].latitude + ", " + pins[i].longitude);
+//fixing
+    //console log lats/longs
+    for (let i = 0; i < pins.length; i++){
+      console.log(pins[i][1] + ", " + pins[i][2]);
+      
     }
-
+    
     const review = [];
-    const combined_reviews = new Array(data.length).fill([]);
+    const combined_reviews = new Array(data2.length).fill([]);
     const empty = new Array(5).fill("N/A");
     const all_reviews = new Array();
-    for (let i = 0; i < data2.length; i++) {
+    for(let i = 0; i < data2.length; i++) {
       review[i] = [
         data2[i].id,
         data2[i].review_title,
         data2[i].review_text,
         data2[i].review_total_score,
         data2[i].restaurant_id,
-        data2[i].timestamp,
+        data2[i].timestamp
       ];
     }
 
-    for (let i = 0; i < data.length; i++) {
-      for (let k = 0; k < data2.length; k++) {
+    for(let i = 0; i < data.length; i++) {
+      for(let k = 0; k < data2.length; k++) {
         if (data[i].id === review[k][4]) {
           combined_reviews[i].push(review[k]);
         }
@@ -75,17 +77,23 @@ export default class TestSelect extends Component {
 
     const options = data.map((restaurant) => ({
       value: restaurant,
-      label: restaurant.name,
+      label: restaurant.name
     }));
+
+    
 
     this.setState({
       options_state: options,
-      loading: false,
-      map_state: pins,
-    });
+      loading: false
+    });  
+    
+    this.setState({
+      map_state: pins
+    })
 
-    console.log(this.state.latitude);
+    console.log(this.state.latitide);
     console.log(this.state.longitude);
+
     console.log(this.state.map_state);
   }
 
@@ -93,12 +101,14 @@ export default class TestSelect extends Component {
   render() {
     return (
       <div>
-       <Map
-        latitude={this.state.latitude}
-        longitude={this.state.longitude}
-        names={this.state.names}
-       all_pins={this.state.map_state}
-      />
+        <Map
+          latitide={this.state.latitide}
+          longitude={this.state.longitude}
+          names={this.state.names}
+
+          all_pins={this.state.map_state}
+          
+        />
         
         <Select
           className="select-class"
