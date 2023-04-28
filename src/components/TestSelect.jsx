@@ -37,11 +37,12 @@ export default class TestSelect extends Component {
     //data for lat/lng for map
     const pins = [];
     for(let i = 0; i < data.length; i++){
-      pins[i] = [
-        data[i].name,
-        data[i].latitide,
-        data[i].longitude
-      ];
+      pins[i] = {
+        name: data[i].name,
+        latitide: data[i].latitide,
+        longitude: data[i].longitude
+      };
+      //computations
     }
 
     //console log lats/longs
@@ -84,7 +85,16 @@ export default class TestSelect extends Component {
     this.setState({
       options_state: options,
       loading: false
-    });   
+    });  
+    
+    this.setState({
+      map_state: pins
+    })
+
+    console.log(this.state.latitide);
+    console.log(this.state.longitude);
+
+    console.log(this.state.map_state);
   }
 
   //Added all_pins array as prop passed to <Map />
@@ -95,8 +105,9 @@ export default class TestSelect extends Component {
           latitide={this.state.latitide}
           longitude={this.state.longitude}
           names={this.state.names}
-          options={this.state.map_state}
-          all_pins={this.pins}
+
+          all_pins={this.state.map_state}
+          
         />
         
         <Select
@@ -111,8 +122,8 @@ export default class TestSelect extends Component {
               phonenumber: value.phone_number,
               website: value.website,
               reviews: value.reviews,
-              latitide: value.latitide,
-              longitude: value.longitude
+              //latitide: value.latitide,
+              //longitude: value.longitude
             });
             if (value.latitide.length === 0) {
               this.setState({
