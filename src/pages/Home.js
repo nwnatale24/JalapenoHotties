@@ -6,6 +6,7 @@ import axios from 'axios'
 import FetchResturauntName from '../components/RestaurantDescription';
 import TestSelect from '../components/TestSelect.jsx';
 import RestaurantListData from '../components/RestaurantListData';
+import Logo from '../Logo.png'
 // Sample API get call with a button to get the list of resturants. 
 // Outputs the results of the API call to the console log.
 // Can see the reponse using inspect element in Chrome. 
@@ -53,58 +54,29 @@ export function Home() {
   return (
   <div>
     <div className = "header-container">
-      <div className = "Logo">
-        More Information
-      </div>
-      <div className = "Title">
-        High-Steaks
-      </div>
-      <div className = "Logo">
-        Map Filters
-      </div>
       
     </div>
     <div className = "body-container">
       <div className = "LeftToolbar">
+        <br></br>
         <div className = "Account">
             <Link className="Account" style={{textdecoration:'none'}} to={url}>Account</Link>
         </div>
-        <div className = "TabsLinks">
-            <Link className="TabsLinks" style={{textdecoration:'none'}}to="/TabsLinks">TabsLinks</Link>
-        </div>
-        <div className = "List">
-          Sort
-        </div>
-        <div className = "Resturant">
-        </div>
+        
       </div>
           
-      <div className = "Popup">
-          <RestaurantListData/>
-          <TestSelect/>
+      <div className = "Middle">
+        <img src={Logo} className= "Logo" alt='Logo'/>
+        <br></br>
+        <RestaurantListData/>
       </div>
-      <div className = "Filters">
-        <div className = "FilterItems">
-          Zipcode
-        </div>
-        <div className = "FilterItems">
-          Distance Within
-        </div>
-        <div className = "FilterItems">
-          Overall Score
-        </div>
-        <div className = "FilterItems">
-          Price
-        </div>
-        <div className = "FilterItems">
-          Dine-In
-        </div>
-        <div className = "FilterItems">
-          Takout
-        </div>
+
+      <div className = "Right">
+        <t>Select a restuarant</t>
+        <TestSelect/>
       </div>
     </div>
-  </div>
+    </div>
   
   );
 }

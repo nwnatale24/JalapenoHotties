@@ -4,6 +4,8 @@ import './App.css';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
+import Logo from '../Logo.png';
+import cheesesteak from '../cheesesteak.png';
 
 // Sample API get call with a button to get the list of resturants. 
 // Outputs the results of the API call to the console log.
@@ -98,28 +100,30 @@ export function Login() {
 
   return (
     <div>
-        <div className="header-container">
-            <div className="Title">Login</div>
-        </div>
-
+      <div className='loginPage'>
+      <img src={Logo} className= "Logo2" alt='Logo2'/>
+      <br></br>
+      <div className='text-box'>
+      Login to Continue
+      <center>
         {/* create a google login button. handle a successful login with the 
             handle_success_callback() function, along with the user. 
         */ }
         <GoogleLogin
+          size='large'
           onSuccess={response => {
             var user = jwt_decode(response.credential);
             console.log(user);
             handle_success_callback(user);
-
           }}
           onError={() => {
             console.log('Login Failed');
           }}
-        />;
-
-        <div className="body-container">
+        />
+        </center>
         </div>
-        
+        <img src={cheesesteak} className= "cheesesteak" alt='cheesesteak'/>
+      </div>
     </div>
 
   );
