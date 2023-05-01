@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import UserReview from '../components/UserReview';
-
+//TESTING FOR BIO FELIPE & NIK
 export default class AccountInfo extends React.Component {
   state = {
     id: 'N/a',
@@ -14,9 +14,9 @@ export default class AccountInfo extends React.Component {
     const idString = `${this.props.user}`;
     const answer = await axios.get(`http://127.0.0.1:8000/api/users/id/${idString}`);
     const answer2 = await axios.get(`http://127.0.0.1:8000/api/reviews/user_id/${idString}`);
-    const response2 = answer2.data.reviews;
+    const response2 = await answer2.data.reviews;
     const answer3 = await axios.get('http://127.0.0.1:8000/api/restaurants');
-    const response3 = answer3.data.restaurants;
+    const response3 = await answer3.data.restaurants;
 
     console.log(answer.data);
     console.log(answer2.data);
@@ -31,7 +31,7 @@ export default class AccountInfo extends React.Component {
 
     for (let i = 0; i < review_arr.length; i++) {
       for (let k = 0; k < restaurant_arr.length; k++) {
-        if (review_arr[i][6] === restaurant_arr[k][0]) {
+        if (review_arr[i][6] == restaurant_arr[k][0]) {
           review_arr[i].push(restaurant_arr[k][2]);
         }
       }
