@@ -1,64 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import UserReview from '../components/UserReview';
-//TESTING FOR BIO FELIPE & NIK
-export default class AccountInfo extends React.Component {
-  state = {
-    id: 'N/a',
-    name: 'N/a',
-    email: 'N/a',
-    user_reviews: [],
-  };
 
-  async componentDidMount() {
+export default function AccountInfo() {
+  const [id, setId] = useState('N/a');
+  const [name, setName] = useState('N/a');
+  const [email, setEmail] = useState('N/a');
+  const [userReviews, setUserReviews] = useState([]);
 
-    const queryParams = new URLSearchParams(window.location.search)
-    const user_id = queryParams.get("id");
+  useEffect(() => {
+    async function fetchData() {
+      const queryParams = new URLSearchParams(window.location.search);
+      const userId = queryParams.get('id');
 
-    const answer = await axios.get(`http://127.0.0.1:8000/api/users/id/${user_id}`);
-    const answer2 = await axios.get(`http://127.0.0.1:8000/api/reviews/user_id/${user_id}`);
-    const response2 = await answer2.data.reviews;
-    const answer3 = await axios.get('http://127.0.0.1:8000/api/restaurants');
-    const response3 = await answer3.data.restaurants;
+      const userResponse = await axios.get(`http://127.0.0.1:8000/api/users/id/${userId}`);
+      const reviewResponse = await axios.get(`http://127.0.0.1:8000/api/reviews/user_id/${userId}`);
+      const restaurantResponse = await axios.get('http://127.0.0.1:8000/api/restaurants');
 
-    console.log(answer.data);
-    console.log(answer2.data);
+      const fullName = `${userResponse.data.users[0].first_name} ${userResponse.data.users[0].last_name}`;
 
-    const fullName = `${answer.data.users[0].first_name} ${answer.data.users[0].last_name}`;
+      let reviewArr = reviewResponse.data.reviews.map(obj => Object.values(obj));
+      let restaurantArr = restaurantResponse.data.restaurants.map(obj => Object.values(obj));
 
-    let review_arr = response2.map(obj => Object.values(obj));
-    let restaurant_arr = response3.map(obj => Object.values(obj));
-
-    for (let i = 0; i < review_arr.length; i++) {
-      for (let k = 0; k < restaurant_arr.length; k++) {
-        if (review_arr[i][6] == restaurant_arr[k][0]) {
-          review_arr[i].push(restaurant_arr[k][2]);
+      for (let i = 0; i < reviewArr.length; i++) {
+        for (let k = 0; k < restaurantArr.length; k++) {
+          if (reviewArr[i][6] == restaurantArr[k][0]) {
+            reviewArr[i].push(restaurantArr[k][2]);
+          }
         }
       }
+
+      setId(userResponse.data.users[0].id);
+      setName(fullName);
+      setEmail(userResponse.data.users[0].email_address);
+      setUserReviews(reviewArr);
     }
 
-    this.setState({
-      id: answer.data.users[0].id,
-      name: fullName,
-      email: answer.data.users[0].email_address,
-      user_reviews: review_arr,
-    });
+    fetchData();
+  }, []);
 
-    console.log(this.state.user_reviews);
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="account-page-info">
-          <h3>Account Info: </h3>
-          <p>Name: {this.state.name}</p>
-          <p>Email: {this.state.email}</p>
-          <div className="Popup">
-            <UserReview reviews={this.state.user_reviews} />
-          </div>
+  return (
+    <div>
+      <div className="account-page-info">
+        <h3>Account Info:</h3>
+        <p>Name: {name}</p>
+        <p>Email: {email}</p>
+        <div className="Popup">
+          <UserReview reviews={userReviews} />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
