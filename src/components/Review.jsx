@@ -6,7 +6,7 @@ function Review(props){
     const [isHighLow, setHighLow] = useState(false)
     const [isLowHigh, setLowHigh] = useState(false)
     const [isUnsorted, setUnsorted] = useState(false)
-    const [isRecent, setRecent] = useState(false)
+    const [isRecent, setRecent] = useState(true)
     const [isOld, setOld] = useState(false)
     
     const all_reviews = []

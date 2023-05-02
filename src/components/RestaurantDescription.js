@@ -7,7 +7,7 @@ import Review from './Review';
 import ShowInfo from './ShowInfo';
 
 function FetchResturauntName(props){
-    const [isToggled, setIsToggled] = useState(false)
+    const [isToggled, setIsToggled] = useState(true)
     const [isposted, setIsposted] = useState(false)
 return (
     <div>

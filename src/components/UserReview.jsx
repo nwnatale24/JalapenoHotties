@@ -3,11 +3,11 @@ import '../App.css';
 import { useState } from 'react';
 
 function UserReview(props){
-    const [isToggled, setIsToggled] = useState(false)
+    const [isToggled, setIsToggled] = useState(true)
     const [isHighLow, setHighLow] = useState(false)
     const [isLowHigh, setLowHigh] = useState(false)
     const [isUnsorted, setUnsorted] = useState(false)
-    const [isRecent, setRecent] = useState(false)
+    const [isRecent, setRecent] = useState(true)
     const [isOld, setOld] = useState(false)
 
     
