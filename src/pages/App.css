@@ -1,21 +1,10 @@
 
-
-.header-container {
-  color:rgb(255, 255, 255) !important;
-  display:flex;
-  justify-content:space-between;
-  width:100vw;
-  height: 5vh;
-  background-color: rgb(25,18,17);
-}
 .body-container {
   text-decoration: none;  
-  color:rgb(255, 255, 255) !important;
   display:flex;
-  justify-content: space-between;
   width: 100%;
-  height: 95vh;
-  background-color: rgb(37,30,27);
+  height: 100vh;
+  background-color: lightgrey;
 }
 
 .LeftToolbar {
@@ -24,18 +13,39 @@
   display:flex;
   flex-direction: column;
   align-items: center;
-  width: 10em;
-  height: 95vh;
-  background-color: rgb(25,18,17);
-  color: lightgrey
+  width: 10%;
+  background-color: rgba(0, 0, 0, 0.795);
+}
+
+.Middle {
+  margin-top: 5px;
+  text-decoration: none;  
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  width: 45%;
+  overflow-y: auto;
+}
+
+.Right {
+  text-decoration: none;  
+  font-size: medium;
+  font-family:sans-serif;
+  text-align: center;
+  width: 45%;
+  margin-right: 5px;
+  margin-top: 5px;
 }
 
 .Account {
-  color:lightgray;
+  color:white;
   text-decoration: none;  
   text-align: center;
+  align-items: center;
+  justify-content: center;
   height: 2em;
-  width: 10em;
+  width: 100%;
 }
 .Account:link {
   text-decoration: none;  
@@ -43,35 +53,22 @@
 
 .Account:hover {
   text-decoration: none;
-  background-color: rgb(40,33,30);
+  background-color: rgb(0, 0, 0);
 }
-.Popup {
-  text-decoration: none;  
-  text-align: center;
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  width: 50vw;
-  overflow-y: auto;
-  
-  
-  
-}
+
 .Popup2 {
   text-decoration: none;  
   text-align: center;
   flex-direction: column;
   display: flex;
   align-items: center;
-  width: 75vw;
-  
-  
-  
+  width: 100%;
 }
 
 .review::-webkit-scrollbar {
-  width: 12px;
+  width: 100%;
 }
+
 .Map {
   text-decoration: none;  
   color:gray;
@@ -79,14 +76,14 @@
   height: 2em;
   width: 100%;
   background-color: rgb(40, 33, 30);
-
 }
+
 .Description {
   text-decoration: none;  
-  color: lightgrey;
+  color: white;
   height: 20%;
-  background-color: rgb(61, 58, 56);
-  width: 50vw;
+  background-color: #E33A3E;
+  margin-bottom: 20px;
 }
 
 
@@ -98,63 +95,25 @@
 }
 
 .Logo {
-  text-decoration: none;  
-  font-size:large;
-  font-family:sans-serif;
-  text-align: center;
-  height: 5vh;
-  width: 10em;
-  color: white;
-
+ width: 40vi;
 }
 
-.TabsLinks {
-  color:lightgray;
-  text-decoration: none;  
-  text-align: center;
-  height: 2em;
-  width: 10em;
-}
-.TabsLinks:hover {
-  text-decoration: none;  
-  background-color: rgb(40,33,30);
-}
 .List {
   text-decoration: none;  
   text-align: center;
   height: 2em;
-  width: 10em;
-  margin-bottom: 2em;
+  width: 100%;
 }
 .List:hover {
   text-decoration: none;  
-  background-color: rgb(40,33,30);
+  background-color: rgb(0, 0, 0);
 }
 
-.Filters {
-  text-decoration: none;  
-  font-size: medium;
-  font-family:sans-serif;
-  text-align: center;
-  height: 95vh;
-  width: 10em;
-  background-color: rgb(25,18,17);
-  color: lightgrey
-}
-.FilterItems {
-  text-decoration: none;  
-  height: 2em;
-  width: 10em;
-}
-.FilterItems:hover {
-  text-decoration: none;  
-  background-color: rgb(40,33,30)
-}
 .Search input{
   text-decoration: none;  
   border: 0;
   height: 2em;
-  width: 10em;
+  width: 100%;
   background-color: rgb(231, 231, 231);
 }
 .Search input:hover {
@@ -174,44 +133,42 @@
 
 .Review-button {
   color:lightgray;
-  background-color: rgb(25,18,17);
   height: 20%;
   width: 100%;
   text-decoration: none;
 }
 .norm-button {
-  width: 50vw;
-  color:lightgray;
-  background-color: rgb(25,18,17);
+  width: 40vi;
+  color:rgb(255, 255, 255);
+  background-color: #E33A3E;
   text-decoration: none;
-  outline-color: rgb(25,18,17);;
+  border-color: #E33A3E;
 }
 .norm-button:hover {
   text-decoration: none;  
-  background-color: rgb(40,33,30)
+  background-color: rgb(0, 0, 0)
 }
 .Review-button:hover {
   text-decoration: none;  
   background-color: rgb(40,33,30)
 }
 .review-body {
-  width: 100%;
+  width: 40vi;
   height: 20em;
-  overflow-y: auto;
+  overflow: auto;
 }
 .restaurant-body {
-  height:7em;
-  width: 100%;
-  padding-bottom: 10%;
-  overflow-y:auto;
+  height:23em;
+  width: 40vi;
+  overflow: auto;
 }
 .restaurant-body::-webkit-scrollbar {
-  width: 12px;
+  width: 100%
 }
 .review {
   color:lightgray;
-  background-color: rgb(38, 38, 41);
-  width: 50vw;
+  background-color: rgb(255, 0, 0);
+  width: 100%;
   
   
 }
@@ -259,6 +216,37 @@
   
   justify-content: left;
   text-align: center;
-  width: 50vw;
+  width: 100%;
   padding-left: 50%;
 }
+
+.loginPage {
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  font-size: x-large;
+  background: linear-gradient(45deg, #E33A3E, lightgray);
+}
+
+.text-box {
+  position: relative;
+  background: linear-gradient(315deg, grey, lightgray);
+  padding: 25px 25px;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-radius: 25px;
+  box-shadow: 0 5px 10px black;
+
+}
+
+.Logo2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 30vi;  
+ }
+
+.cheesesteak {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 20vi;
+ }

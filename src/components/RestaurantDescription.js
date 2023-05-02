@@ -7,20 +7,20 @@ import Review from './Review';
 import ShowInfo from './ShowInfo';
 
 function FetchResturauntName(props){
-    const [isToggled, setIsToggled] = useState(false)
+    const [isToggled, setIsToggled] = useState(true)
     const [isposted, setIsposted] = useState(false)
 return (
     <div>
         <div className = "Description">
-            <p>Resturaunt Name     : {props.names}</p>
+            <p>Restaurant Name     : {props.names}</p>
             <p>City                : {props.city}</p>
             <p>Phone Number        : {props.phonenumber}</p>
-            <p>website             : {props.website}</p> 
+            <p>Website             : {props.website}</p> 
             <div className='List-review-button' onClick={() => setIsToggled(!isToggled)}>
                 Reviews
             </div> 
             <div className='List-review-button' onClick={() => setIsposted(!isposted)}>
-               post reviews
+               Post Reviews
             </div> 
         </div>
         { isToggled && 

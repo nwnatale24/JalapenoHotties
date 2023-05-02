@@ -4,7 +4,7 @@ import { useState } from 'react';
 function RestaurantListView(props){
     const [isHighLow, setHighLow] = useState(false)
     const [isLowHigh, setLowHigh] = useState(false)
-    const [isUnsorted, setUnsorted] = useState(false)
+    const [isUnsorted, setUnsorted] = useState(true)
     const num_restaurants = props.unsorted.length
     
     const unsorted = []
