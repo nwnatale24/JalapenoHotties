@@ -26,13 +26,15 @@ function ShowModal(props){
     
     const test = inputs;
     test.rid = props.rest_id;
-    test.user = props.user;
+    const queryParams = new URLSearchParams(window.location.search)
+    const user_id = queryParams.get("id");
+
     
     var bodyFormData = new FormData();
     bodyFormData.append('review_title',  test.title);
     bodyFormData.append('review_text',  test.description);
     bodyFormData.append('review_total_score', test.score);
-    bodyFormData.append('user_id', test.user);
+    bodyFormData.append('user_id', user_id);
     bodyFormData.append('restaurant_id',  test.rid);
     
 
@@ -42,7 +44,7 @@ function ShowModal(props){
     const s1 = '' + test.title;
     const s2 = '' + test.description;
     const s3 = '' + test.score;
-    const s4 = '' + test.user;
+    const s4 = '' + user_id;
     const s5 = '' + test.rid;
     const url = 'http://127.0.0.1:8000/api/reviews?review_title='+ s1 + '&review_text=' + s2 + '&review_total_score=' + s3 + '&user_id=' + s4 + '&restaurant_id=' + s5;
     axios.post(url, bodyFormData, config)

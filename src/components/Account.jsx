@@ -11,9 +11,12 @@ export default class AccountInfo extends React.Component {
   };
 
   async componentDidMount() {
-    const idString = `${this.props.user}`;
-    const answer = await axios.get(`http://127.0.0.1:8000/api/users/id/${idString}`);
-    const answer2 = await axios.get(`http://127.0.0.1:8000/api/reviews/user_id/${idString}`);
+
+    const queryParams = new URLSearchParams(window.location.search)
+    const user_id = queryParams.get("id");
+
+    const answer = await axios.get(`http://127.0.0.1:8000/api/users/id/${user_id}`);
+    const answer2 = await axios.get(`http://127.0.0.1:8000/api/reviews/user_id/${user_id}`);
     const response2 = await answer2.data.reviews;
     const answer3 = await axios.get('http://127.0.0.1:8000/api/restaurants');
     const response3 = await answer3.data.restaurants;
