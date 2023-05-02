@@ -12,7 +12,7 @@ function FetchResturauntName(props){
 return (
     <div>
         <div className = "Description">
-            <p>Resturaunt Name     : {props.names}</p>
+            <p>Restaurant Name     : {props.names}</p>
             <p>City                : {props.city}</p>
             <p>Phone Number        : {props.phonenumber}</p>
             <p>Website             : {props.website}</p> 
