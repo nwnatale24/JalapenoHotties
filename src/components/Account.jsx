@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import UserReview from '../components/UserReview';
+import '../App.css';
+import Logo from '../Logo.png'
+
 //TESTING FOR BIO FELIPE & NIK
 export default class AccountInfo extends React.Component {
   state = {
@@ -49,16 +52,17 @@ export default class AccountInfo extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='account-page'>
+        <img src={Logo} className= "Logo3" alt='Logo'/>
         <div className="account-page-info">
           <h3>Account Info: </h3>
           <p>Name: {this.state.name}</p>
           <p>Email: {this.state.email}</p>
-          <div className="Popup">
-            <UserReview reviews={this.state.user_reviews} />
-          </div>
         </div>
-      </div>
+        <div className="account-page-review">
+            <UserReview reviews={this.state.user_reviews} />
+        </div>
+        </div>
     );
   }
 }

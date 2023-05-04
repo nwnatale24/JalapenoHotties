@@ -72,7 +72,6 @@ export function Home() {
       </div>
 
       <div className = "Right">
-        <t>Select a Restaurant</t>
         <TestSelect/>
       </div>
     </div>

@@ -16,12 +16,12 @@ return (
             <p>City                : {props.city}</p>
             <p>Phone Number        : {props.phonenumber}</p>
             <p>Website             : {props.website}</p> 
-            <div className='List-review-button' onClick={() => setIsToggled(!isToggled)}>
-                Reviews
-            </div> 
-            <div className='List-review-button' onClick={() => setIsposted(!isposted)}>
-               Post Reviews
-            </div> 
+        </div>
+        <div className="Popup2">
+            <button className='Description-Buttons' onClick={() => setIsToggled(!isToggled)}>
+            Restaurant Reviews </button> 
+            <button className='Description-Buttons' onClick={() => setIsposted(!isposted)}>
+            Post Reviews </button> 
         </div>
         { isToggled && 
         <Review 

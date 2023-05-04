@@ -60,7 +60,8 @@ function ShowModal(props){
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Reviw Title:
+      <label>Review Title:
+      <br></br>
       <input 
         type="text" 
         name="title" 
@@ -69,7 +70,8 @@ function ShowModal(props){
       />
       </label>
       <br></br>
-      <label>Description
+      <label>Description:
+      <br></br>
         <input 
           type="text" 
           name="description" 
@@ -78,10 +80,13 @@ function ShowModal(props){
         />
         </label>
         <br></br>
-        <label>Score:
+        <label>Score: (1-5)
+        <br></br>
         <input 
           type="number" 
           name="score" 
+          min="1"
+          max="5"
           value={inputs.score || ""} 
           onChange={handleChange}
         />
