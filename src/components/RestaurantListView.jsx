@@ -16,7 +16,7 @@ function RestaurantListView(props){
     }
     const unsorted_list = unsorted.map(rest_1 => (
         <div className='restaurantinfo'>
-           <p><b>Title:</b>  {rest_1.name}</p>
+           <p><font size="3"><u>{rest_1.name}</u></font></p>
            <p><b>Average Score:</b>  {rest_1.average_score}</p>
         </div>
     ))
@@ -30,7 +30,7 @@ function RestaurantListView(props){
     }
     const high_low_list = high_low.map(rest_2 => (
         <div className='restaurantinfo'>
-           <p><b>Title:</b>  {rest_2.name}</p>
+           <p><font size="3"><u>{rest_2.name}</u></font></p>
            <p><b>Average Score:</b>  {rest_2.average_score}</p>
         </div>
     ))
@@ -44,8 +44,8 @@ function RestaurantListView(props){
     }
     const low_high_list = low_high.map(rest_3 => (
         <div className='restaurantinfo'>
-           <p><b>Title:</b>  {rest_3.name}</p>
-           <p><b>Average Score:</b>  {rest_3.average_score}</p>
+           <p><font size="3"><u>{rest_3.name}</u></font></p>
+           <p>Average Score: {rest_3.average_score}</p>
         </div>
     ))
 
@@ -55,8 +55,8 @@ return (
     
     <div className='Popup2'>
         <button className='norm-button' onClick={() => {setUnsorted(!isUnsorted);setHighLow(false);setLowHigh(false)}}>Unsorted Restaurant Listings</button>
-        <button className='norm-button' onClick={() => {setHighLow(!isHighLow);setUnsorted(false);setLowHigh(false)}}>Highest to Lowest Rated Restaurants</button>
-        <button className='norm-button' onClick={() => {setLowHigh(!isLowHigh);setUnsorted(false);setHighLow(false)}}>Lowest to Highested Rated Restaurants</button>
+        <button className='norm-button' onClick={() => {setHighLow(!isHighLow);setUnsorted(false);setLowHigh(false)}}>Highest to Lowest Score</button>
+        <button className='norm-button' onClick={() => {setLowHigh(!isLowHigh);setUnsorted(false);setHighLow(false)}}>Lowest to Highested Score</button>
         { isHighLow && 
         <div className='restaurant-body'>{high_low_list}</div>
         }

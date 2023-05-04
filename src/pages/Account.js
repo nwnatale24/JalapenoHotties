@@ -1,4 +1,5 @@
 import AccountInfo from '../components/Account'
+import './App.css';
 
 export function Account() {
 
@@ -11,13 +12,9 @@ export function Account() {
     console.log(user_id);
 
     return (
-        <div>
-            <div className="header-container">
-                <div className="Title">Account</div>
-            </div>
-            <div className="body-container">
-                <AccountInfo user={user_id} />
-            </div>
-        </div>
+        <dev>
+        <style>{'body { background-color: lightgrey; }'}</style>
+        <AccountInfo user={user_id} />  
+        </dev>      
     )
 }

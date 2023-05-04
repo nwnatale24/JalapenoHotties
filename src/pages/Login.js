@@ -100,11 +100,13 @@ export function Login() {
 
   return (
     <div>
+      <style>{'body { background-color: lightgrey }'}</style>
       <div className='loginPage'>
       <img src={Logo} className= "Logo2" alt='Logo2'/>
       <br></br>
       <div className='text-box'>
       Login to Continue
+      <br></br><br></br>
       <center>
         {/* create a google login button. handle a successful login with the 
             handle_success_callback() function, along with the user. 

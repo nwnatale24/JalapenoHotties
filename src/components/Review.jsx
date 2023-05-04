@@ -31,41 +31,41 @@ function Review(props){
     
     const unsorted_list = all_reviews.map(review_1 => (
         <div className='review'>
-           <p><b>Title:</b>  {review_1.title}</p>
-           <p><b>Text:</b>{review_1.desc}</p>
+           <p><font size="3"><u>{review_1.title}</u></font></p>
+           <p>{review_1.desc}</p>
            <p><b>Score:</b>  {review_1.score}</p>
            <p>{review_1.timestamp}</p>
         </div>
     ))
     const high_low_list = high_low.map(review_2 => (
         <div className='review'>
-           <p><b>Title:</b>  {review_2.title}</p>
-           <p><b>Text:</b>{review_2.desc}</p>
+           <p><font size="3"><u>{review_2.title}</u></font></p>
+           <p>{review_2.desc}</p>
            <p><b>Score:</b>  {review_2.score}</p>
            <p>{review_2.timestamp}</p>
         </div>
     ))
     const low_high_list = low_high.map(review_3 => (
         <div className='review'>
-           <p><b>Title:</b>  {review_3.title}</p>
-           <p><b>Text:</b>{review_3.desc}</p>
+           <p><font size="3"><u>{review_3.title}</u></font></p>
+           <p>{review_3.desc}</p>
            <p><b>Score:</b>  {review_3.score}</p>
            <p>{review_3.timestamp}</p>
         </div>
     ))
     const recent_list = recent.map(review_4 => (
         <div className='review'>
-           <p><b>Title:</b>  {review_4.title}</p>
-           <p><b>Text:</b>{review_4.desc}</p>
+            <p><font size="3"><u>{review_4.title}</u></font></p>
+           <p>{review_4.desc}</p>
            <p><b>Score:</b>  {review_4.score}</p>
            <p>{review_4.timestamp}</p>
         </div>
     ))
     const old_list = old.map(review_5 => (
         <div className='review'>
-           <p><b>Title:</b>  {review_5.title}</p>
-           <p><b>Text:</b>{review_5.desc}</p>
-           <p><b>Score:</b>  {review_5.score}</p>
+           <p><font size="3"><u>{review_5.title}</u></font></p>
+           <p>{review_5.desc}</p>
+           <p>Score: {review_5.score}</p>
            <p>{review_5.timestamp}</p>
         </div>
     ))
@@ -74,10 +74,10 @@ return (
     <div className='review-body'>
         <div className='button-body'>
         <button className='review-sort-buttons' onClick={() => {setUnsorted(!isUnsorted);setHighLow(false);setLowHigh(false);setRecent(false);setOld(false)}}>Unordered</button>
-        <button className='review-sort-buttons' onClick={() => {setHighLow(!isHighLow);setUnsorted(false);setLowHigh(false);setRecent(false);setOld(false)}}>Best-Worst Scores</button>
-        <button className='review-sort-buttons' onClick={() => {setLowHigh(!isLowHigh);setUnsorted(false);setHighLow(false);setRecent(false);setOld(false)}}>Worst-Best Scores</button>
-        <button className='review-sort-buttons' onClick={() => {setRecent(!isRecent);setUnsorted(false);setHighLow(false);setLowHigh(false);setOld(false)}}>Recent-Oldest Added</button>
-        <button className='review-sort-buttons' onClick={() => {setOld(!isOld);setUnsorted(false);setHighLow(false);setLowHigh(false);setRecent(false)}}>Oldest-Recent Added</button>
+        <button className='review-sort-buttons' onClick={() => {setHighLow(!isHighLow);setUnsorted(false);setLowHigh(false);setRecent(false);setOld(false)}}>Best</button>
+        <button className='review-sort-buttons' onClick={() => {setLowHigh(!isLowHigh);setUnsorted(false);setHighLow(false);setRecent(false);setOld(false)}}>Worst</button>
+        <button className='review-sort-buttons' onClick={() => {setRecent(!isRecent);setUnsorted(false);setHighLow(false);setLowHigh(false);setOld(false)}}>Newest</button>
+        <button className='review-sort-buttons' onClick={() => {setOld(!isOld);setUnsorted(false);setHighLow(false);setLowHigh(false);setRecent(false)}}>Oldest</button>
         </div>
         
         { isHighLow && 
