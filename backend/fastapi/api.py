@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, Table, MetaData, insert, Column, String, Integer, Date, Double
-from helpers.clean_nulls import replace_none_values
 from helpers.get_date_info import *
 from datetime import datetime
 
@@ -461,10 +460,6 @@ async def get_review_by_user_id(user_id):
         # Close the connection to the database. 
         conn.close()
 
-        # Clean dict of Null values, and replace them with 'null' string instead
-        # for easy checking.
-        matches = replace_none_values(matches)
-
         return(matches)
         
     except Exception as e:
@@ -511,10 +506,6 @@ async def get_review_by_restaurant_id(restaurant_id):
 
         # Close the connection to the database. 
         conn.close()
-
-        # Clean dict of Null values, and replace them with 'null' string instead
-        # for easy checking.
-        matches = replace_none_values(matches)
 
         return(matches)
         
