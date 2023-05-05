@@ -360,6 +360,9 @@ async def post_review( review_title: str, review_text: str, review_total_score: 
         now = datetime.now()
         curr_time = now.strftime("%Y%m%d%H%M%S")
 
+        if (review_total_score > 5 or review_total_score < 1):
+            raise Exception("ERROR: review score must be from 1 (inclusive) to 5 (inclusive)")
+
         # Insert a review using the following values. 
         insert_query = insert(review_table).values(
             review_title=review_title,
